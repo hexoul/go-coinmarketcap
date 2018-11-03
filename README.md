@@ -8,3 +8,6 @@
 ## Usage
 - As library, start from `coinmarketcap.GetInstanceWithKey('YOUR_API_KEY')`
 - As program, start from `coinmarketcap.GetInstance()` after executing `go run -apikey=[YOUR_API_KEY]`
+
+## Reference
+[CMC Pro](https://pro.coinmarketcap.com/api/v1)

@@ -98,8 +98,11 @@ func (s *Client) Info(options *types.InfoOptions) (map[string]*types.Info, error
 	url := fmt.Sprintf("%s/cryptocurrency/info?%s", baseURL, strings.Join(params, "&"))
 
 	body, err := s.makeReq(url)
+	if err != nil {
+		return nil, err
+	}
 	resp := new(types.Response)
-	if err = json.Unmarshal(body, &resp); err != nil {
+	if err := json.Unmarshal(body, &resp); err != nil {
 		return nil, err
 	}
 
@@ -115,7 +118,7 @@ func (s *Client) Info(options *types.InfoOptions) (map[string]*types.Info, error
 		if err != nil {
 			return nil, err
 		}
-		if err = json.Unmarshal(b, info); err != nil {
+		if err := json.Unmarshal(b, info); err != nil {
 			return nil, err
 		}
 		result[k] = info
@@ -148,8 +151,11 @@ func (s *Client) ListingsLatest(options *types.ListingsLatestOptions) ([]*types.
 	url := fmt.Sprintf("%s/cryptocurrency/listings/latest?%s", baseURL, strings.Join(params, "&"))
 
 	body, err := s.makeReq(url)
+	if err != nil {
+		return nil, err
+	}
 	resp := new(types.Response)
-	if err = json.Unmarshal(body, &resp); err != nil {
+	if err := json.Unmarshal(body, &resp); err != nil {
 		return nil, err
 	}
 
@@ -166,8 +172,7 @@ func (s *Client) ListingsLatest(options *types.ListingsLatestOptions) ([]*types.
 		if err != nil {
 			return nil, err
 		}
-		err = json.Unmarshal(b, listing)
-		if err != nil {
+		if err := json.Unmarshal(b, listing); err != nil {
 			return nil, err
 		}
 		listings = append(listings, listing)
