@@ -8,7 +8,7 @@ import (
 )
 
 func init() {
-	GetInstanceWithKey("f037b62f-2aa9-46a0-8356-596251b1385a")
+	GetInstanceWithKey("YOUR_API_KEY")
 }
 
 func TestInfo(t *testing.T) {
