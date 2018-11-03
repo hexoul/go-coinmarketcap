@@ -12,7 +12,7 @@ func init() {
 }
 
 func TestInfo(t *testing.T) {
-	info, err := GetInstance().Info(&types.InfoOptions{
+	info, err := GetInstance().Info(&types.Options{
 		Symbol: "BTC",
 	})
 	if err != nil {
@@ -28,7 +28,7 @@ func TestInfo(t *testing.T) {
 }
 
 func TestListingsLatest(t *testing.T) {
-	listings, err := GetInstance().ListingsLatest(&types.ListingsLatestOptions{
+	listings, err := GetInstance().ListingsLatest(&types.Options{
 		Limit: 1,
 	})
 	if err != nil {

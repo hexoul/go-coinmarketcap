@@ -16,8 +16,8 @@ import (
 
 // Interface for APIs
 type Interface interface {
-	Info(options *types.InfoOptions) (map[string]*types.Info, error)
-	ListingsLatest(options *types.ListingsLatestOptions) ([]*types.Listing, error)
+	Info(options *types.Options) (map[string]*types.Info, error)
+	ListingsLatest(options *types.Options) ([]*types.Listing, error)
 }
 
 // Client the CoinMarketCap client
@@ -83,19 +83,10 @@ func (s *Client) makeReq(url string) ([]byte, error) {
 
 // Info returns all static metadata for one or more cryptocurrencies
 // including name, symbol, logo, and its various registered URLs.
-func (s *Client) Info(options *types.InfoOptions) (map[string]*types.Info, error) {
-	var params []string
-	if options == nil {
-		options = new(types.InfoOptions)
-	}
-	if options.ID != "" {
-		params = append(params, fmt.Sprintf("id=%s", options.ID))
-	}
-	if options.Symbol != "" {
-		params = append(params, fmt.Sprintf("symbol=%s", options.Symbol))
-	}
-
-	url := fmt.Sprintf("%s/cryptocurrency/info?%s", baseURL, strings.Join(params, "&"))
+// src: https://pro-api.coinmarketcap.com/v1/cryptocurrency/info
+// doc: https://pro.coinmarketcap.com/api/v1#operation/getV1CryptocurrencyInfo
+func (s *Client) Info(options *types.Options) (map[string]*types.Info, error) {
+	url := fmt.Sprintf("%s/cryptocurrency/info?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
 
 	body, err := s.makeReq(url)
 	if err != nil {
@@ -130,25 +121,10 @@ func (s *Client) Info(options *types.InfoOptions) (map[string]*types.Info, error
 // ListingsLatest gets a paginated list of all cryptocurrencies with latest market data.
 // You can configure this call to sort by market cap or another market ranking field.
 // Use the "convert" option to return market values in multiple fiat and cryptocurrency conversions in the same call.
-func (s *Client) ListingsLatest(options *types.ListingsLatestOptions) ([]*types.Listing, error) {
-	var params []string
-	if options == nil {
-		options = new(types.ListingsLatestOptions)
-	}
-	if options.Start != 0 {
-		params = append(params, fmt.Sprintf("start=%v", options.Start))
-	}
-	if options.Limit != 0 {
-		params = append(params, fmt.Sprintf("limit=%v", options.Limit))
-	}
-	if options.Convert != "" {
-		params = append(params, fmt.Sprintf("convert=%s", options.Convert))
-	}
-	if options.Sort != "" {
-		params = append(params, fmt.Sprintf("sort=%s", options.Sort))
-	}
-
-	url := fmt.Sprintf("%s/cryptocurrency/listings/latest?%s", baseURL, strings.Join(params, "&"))
+// src: https://pro-api.coinmarketcap.com/v1/exchange/listings/latest
+// doc: https://pro.coinmarketcap.com/api/v1#operation/getV1ExchangeListingsLatest
+func (s *Client) ListingsLatest(options *types.Options) ([]*types.Listing, error) {
+	url := fmt.Sprintf("%s/cryptocurrency/listings/latest?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
 
 	body, err := s.makeReq(url)
 	if err != nil {

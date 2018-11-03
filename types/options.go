@@ -1,17 +1,14 @@
 package types
 
-// InfoOptions options
-type InfoOptions struct {
-	ID     string
-	Symbol string
-}
-
-// ListingsLatestOptions options
-type ListingsLatestOptions struct {
+// Options for request
+type Options struct {
+	ID      string
+	Symbol  string
 	Start   int
 	Limit   int
 	Convert string
 	Sort    string
+	SortDir string
 }
 
 // SortOptions sort options
