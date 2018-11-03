@@ -29,7 +29,6 @@ var (
 	instance *Client
 	once     sync.Once
 	apiKey   string
-
 	// ErrCouldNotCast could not cast error
 	ErrCouldNotCast = errors.New("could not cast")
 )
