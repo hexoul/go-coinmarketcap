@@ -1,7 +1,6 @@
 package coinmarketcap
 
 import (
-	"encoding/json"
 	"testing"
 
 	"github.com/hexoul/go-coinmarketcap/types"
@@ -18,11 +17,7 @@ func TestExchangeInfo(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if info["BTC"].Name != "Bitcoin" {
+	if info["binance"].Name != "Binance" {
 		t.FailNow()
-	}
-
-	if ret, err := json.Marshal(info); err == nil {
-		t.Log(string(ret))
 	}
 }
