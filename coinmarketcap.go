@@ -16,8 +16,8 @@ import (
 
 // Interface for APIs
 type Interface interface {
-	CryptoInfo(options *types.Options) (map[string]*types.CryptoInfo, error)
-	CryptoMap(options *types.Options) (map[string]*types.CryptoMap, error)
+	CryptoInfo(options *types.Options) (*types.CryptoInfoMap, error)
+	CryptoMap(options *types.Options) (*types.CryptoMapList, error)
 	CryptoListingsLatest(options *types.Options) ([]*types.CryptoListing, error)
 	CryptoMarketQuotesLatest(options *types.Options) (map[string]*types.CryptoListing, error)
 

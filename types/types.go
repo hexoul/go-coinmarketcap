@@ -16,7 +16,12 @@ type Response struct {
 	Data   interface{} `json:"data"`
 }
 
-// CryptoInfo options
+// CryptoInfoMap structure
+type CryptoInfoMap struct {
+	CryptoInfo map[string]*CryptoInfo `json:"data"`
+}
+
+// CryptoInfo structure
 type CryptoInfo struct {
 	ID       float64                `json:"id"`
 	Name     string                 `json:"name"`
@@ -28,7 +33,12 @@ type CryptoInfo struct {
 	Urls     map[string]interface{} `json:"urls"`
 }
 
-// CryptoMap options
+// CryptoMapList structure
+type CryptoMapList struct {
+	CryptoMap []*CryptoMap `json:"data"`
+}
+
+// CryptoMap structure
 type CryptoMap struct {
 	ID                  float64 `json:"id"`
 	Name                string  `json:"name"`

@@ -13,7 +13,7 @@ import (
 // arg: id, symbol
 // src: https://pro-api.coinmarketcap.com/v1/cryptocurrency/info
 // doc: https://pro.coinmarketcap.com/api/v1#operation/getV1CryptocurrencyInfo
-func (s *Client) CryptoInfo(options *types.Options) (map[string]*types.CryptoInfo, error) {
+func (s *Client) CryptoInfo(options *types.Options) (*types.CryptoInfoMap, error) {
 	url := fmt.Sprintf("%s/cryptocurrency/info?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
 
 	resp, err := s.getResponse(url)
@@ -21,32 +21,22 @@ func (s *Client) CryptoInfo(options *types.Options) (map[string]*types.CryptoInf
 		return nil, err
 	}
 
-	var results = make(map[string]*types.CryptoInfo)
-	data, ok := resp.Data.(map[string]interface{})
-	if !ok {
-		return nil, ErrCouldNotCast
+	result := new(types.CryptoInfoMap)
+	b, err := json.Marshal(resp)
+	if err != nil {
+		return nil, err
 	}
-
-	for k, v := range data {
-		result := new(types.CryptoInfo)
-		b, err := json.Marshal(v)
-		if err != nil {
-			return nil, err
-		}
-		if err := json.Unmarshal(b, result); err != nil {
-			return nil, err
-		}
-		results[k] = result
+	if err := json.Unmarshal(b, result); err != nil {
+		return nil, err
 	}
-
-	return results, nil
+	return result, nil
 }
 
 // CryptoMap returns a paginated list of all cryptocurrencies by CoinMarketCap ID
 // arg: symbol, start, limit, listing_status
 // src: https://pro-api.coinmarketcap.com/v1/cryptocurrency/map
 // doc: https://pro.coinmarketcap.com/api/v1#operation/getV1CryptocurrencyMap
-func (s *Client) CryptoMap(options *types.Options) ([]*types.CryptoMap, error) {
+func (s *Client) CryptoMap(options *types.Options) (*types.CryptoMapList, error) {
 	url := fmt.Sprintf("%s/cryptocurrency/map?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
 
 	resp, err := s.getResponse(url)
@@ -54,25 +44,15 @@ func (s *Client) CryptoMap(options *types.Options) ([]*types.CryptoMap, error) {
 		return nil, err
 	}
 
-	var results []*types.CryptoMap
-	data, ok := resp.Data.([]interface{})
-	if !ok {
-		return nil, ErrCouldNotCast
+	result := new(types.CryptoMapList)
+	b, err := json.Marshal(resp)
+	if err != nil {
+		return nil, err
 	}
-
-	for i := range data {
-		result := new(types.CryptoMap)
-		b, err := json.Marshal(data[i])
-		if err != nil {
-			return nil, err
-		}
-		if err := json.Unmarshal(b, result); err != nil {
-			return nil, err
-		}
-		results = append(results, result)
+	if err := json.Unmarshal(b, result); err != nil {
+		return nil, err
 	}
-
-	return results, nil
+	return result, nil
 }
 
 // CryptoListingsLatest gets a paginated list of all cryptocurrencies with latest market data.

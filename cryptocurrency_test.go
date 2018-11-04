@@ -11,25 +11,25 @@ func init() {
 }
 
 func TestCryptoInfo(t *testing.T) {
-	info, err := GetInstance().CryptoInfo(&types.Options{
+	ret, err := GetInstance().CryptoInfo(&types.Options{
 		Symbol: "BTC",
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if info["BTC"].Name != "Bitcoin" {
+	if ret.CryptoInfo["BTC"].Name != "Bitcoin" {
 		t.FailNow()
 	}
 }
 
 func TestCryptoMap(t *testing.T) {
-	info, err := GetInstance().CryptoMap(&types.Options{
+	ret, err := GetInstance().CryptoMap(&types.Options{
 		Symbol: "BTC",
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(info) == 0 || info[0].Name != "Bitcoin" {
+	if len(ret.CryptoMap) == 0 || ret.CryptoMap[0].Name != "Bitcoin" {
 		t.FailNow()
 	}
 }
