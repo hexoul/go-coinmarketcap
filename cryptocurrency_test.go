@@ -41,7 +41,6 @@ func TestCryptoListingsLatest(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-
 	if len(listings) == 0 {
 		t.FailNow()
 	}
@@ -49,6 +48,21 @@ func TestCryptoListingsLatest(t *testing.T) {
 		t.FailNow()
 	}
 	if listings[0].Quote["USD"].Price <= 0 {
+		t.FailNow()
+	}
+}
+
+func TestCryptoMarketQuotesLatest(t *testing.T) {
+	quotes, err := GetInstance().CryptoMarketQuotesLatest(&types.Options{
+		Symbol: "BTC,ETH",
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(quotes) == 0 || len(quotes) != 2 {
+		t.FailNow()
+	}
+	if quotes["BTC"].Name != "Bitcoin" || quotes["ETH"].Name != "Ethereum" {
 		t.FailNow()
 	}
 }

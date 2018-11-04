@@ -78,7 +78,7 @@ func (s *Client) CryptoMap(options *types.Options) ([]*types.CryptoMap, error) {
 // CryptoListingsLatest gets a paginated list of all cryptocurrencies with latest market data.
 // arg: start, limit, convert, sort, sort_dir, cryptocurrency_type
 // src: https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest
-// doc: https://pro.coinmarketcap.com/api/v1#operation/getV1ExchangeListingsLatest
+// doc: https://pro.coinmarketcap.com/api/v1#operation/getV1CryptocurrencyListingsLatest
 func (s *Client) CryptoListingsLatest(options *types.Options) ([]*types.CryptoListing, error) {
 	url := fmt.Sprintf("%s/cryptocurrency/listings/latest?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
 
@@ -103,6 +103,39 @@ func (s *Client) CryptoListingsLatest(options *types.Options) ([]*types.CryptoLi
 			return nil, err
 		}
 		results = append(results, result)
+	}
+
+	return results, nil
+}
+
+// CryptoMarketQuotesLatest gets the latest market quote for 1 or more cryptocurrencies.
+// arg: id, symbol, convert
+// src: https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest
+// doc: https://pro.coinmarketcap.com/api/v1#operation/getV1CryptocurrencyQuotesLatest
+func (s *Client) CryptoMarketQuotesLatest(options *types.Options) (map[string]*types.CryptoListing, error) {
+	url := fmt.Sprintf("%s/cryptocurrency/quotes/latest?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
+
+	resp, err := s.getResponse(url)
+	if err != nil {
+		return nil, err
+	}
+
+	var results = make(map[string]*types.CryptoListing)
+	data, ok := resp.Data.(map[string]interface{})
+	if !ok {
+		return nil, ErrCouldNotCast
+	}
+
+	for k, v := range data {
+		result := new(types.CryptoListing)
+		b, err := json.Marshal(v)
+		if err != nil {
+			return nil, err
+		}
+		if err := json.Unmarshal(b, result); err != nil {
+			return nil, err
+		}
+		results[k] = result
 	}
 
 	return results, nil

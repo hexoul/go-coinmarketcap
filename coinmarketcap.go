@@ -19,6 +19,7 @@ type Interface interface {
 	CryptoInfo(options *types.Options) (map[string]*types.CryptoInfo, error)
 	CryptoMap(options *types.Options) (map[string]*types.CryptoMap, error)
 	CryptoListingsLatest(options *types.Options) ([]*types.CryptoListing, error)
+	CryptoMarketQuotesLatest(options *types.Options) (map[string]*types.CryptoListing, error)
 
 	ExchangeInfo(options *types.Options) (map[string]*types.ExchangeInfo, error)
 }
