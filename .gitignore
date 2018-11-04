@@ -12,4 +12,5 @@
 *.out
 
 *.lock
+*.log
 vendor

@@ -1,4 +1,4 @@
-// Package types of both request and response
+// Package types of both request and response for API
 package types
 
 // Status structure
