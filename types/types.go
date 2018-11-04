@@ -16,8 +16,8 @@ type Response struct {
 	Data   interface{} `json:"data"`
 }
 
-// Listing structure
-type Listing struct {
+// CryptoListing structure
+type CryptoListing struct {
 	ID                float64           `json:"id"`
 	Name              string            `json:"name"`
 	Symbol            string            `json:"symbol"`
@@ -43,8 +43,8 @@ type Quote struct {
 	LastUpdated      string  `json:"last_updated"`
 }
 
-// Info options
-type Info struct {
+// CryptoInfo options
+type CryptoInfo struct {
 	ID       float64                `json:"id"`
 	Name     string                 `json:"name"`
 	Symbol   string                 `json:"symbol"`

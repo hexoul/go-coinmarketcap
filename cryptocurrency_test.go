@@ -11,8 +11,8 @@ func init() {
 	GetInstanceWithKey("YOUR_API_KEY")
 }
 
-func TestInfo(t *testing.T) {
-	info, err := GetInstance().Info(&types.Options{
+func TestCryptoInfo(t *testing.T) {
+	info, err := GetInstance().CryptoInfo(&types.Options{
 		Symbol: "BTC",
 	})
 	if err != nil {
@@ -27,8 +27,8 @@ func TestInfo(t *testing.T) {
 	}
 }
 
-func TestListingsLatest(t *testing.T) {
-	listings, err := GetInstance().ListingsLatest(&types.Options{
+func TestCryptoListingsLatest(t *testing.T) {
+	listings, err := GetInstance().CryptoListingsLatest(&types.Options{
 		Limit: 1,
 	})
 	if err != nil {
