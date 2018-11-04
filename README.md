@@ -13,7 +13,7 @@
 | Type           | Endpoint                               | Implemented |
 |----------------|----------------------------------------|-------------|
 | Cryptocurrency | /v1/cryptocurrency/info                | YES    |
-| Cryptocurrency | /v1/cryptocurrency/map                 | -      |
+| Cryptocurrency | /v1/cryptocurrency/map                 | YES    |
 | Cryptocurrency | /v1/cryptocurrency/listings/latest     | YES    |
 | Cryptocurrency | /v1/cryptocurrency/listings/historical | -      |
 | Cryptocurrency | /v1/cryptocurrency/market-pairs/latest | -      |
@@ -32,4 +32,4 @@
 | Tools          | /v1/tools/price-conversion             | -      |
 
 ## Reference
-[CMC Pro](https://pro.coinmarketcap.com/api/v1)
+[Coinmarketcap (CMC) Pro](https://pro.coinmarketcap.com/api/v1)
