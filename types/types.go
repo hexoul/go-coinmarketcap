@@ -28,6 +28,17 @@ type CryptoInfo struct {
 	Urls     map[string]interface{} `json:"urls"`
 }
 
+// CryptoMap options
+type CryptoMap struct {
+	ID                  float64 `json:"id"`
+	Name                string  `json:"name"`
+	Symbol              string  `json:"symbol"`
+	Slug                string  `json:"slug"`
+	IsActive            int     `json:"is_active"`
+	FirstHistoricalData string  `json:"first_historical_data"`
+	LastHistoricalData  string  `json:"last_historical_data"`
+}
+
 // CryptoListing structure
 type CryptoListing struct {
 	ID                float64           `json:"id"`

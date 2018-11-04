@@ -21,23 +21,23 @@ func (s *Client) ExchangeInfo(options *types.Options) (map[string]*types.Exchang
 		return nil, err
 	}
 
-	var result = make(map[string]*types.ExchangeInfo)
-	ifcs, ok := resp.Data.(map[string]interface{})
+	var results = make(map[string]*types.ExchangeInfo)
+	data, ok := resp.Data.(map[string]interface{})
 	if !ok {
 		return nil, ErrCouldNotCast
 	}
 
-	for k, v := range ifcs {
-		info := new(types.ExchangeInfo)
+	for k, v := range data {
+		result := new(types.ExchangeInfo)
 		b, err := json.Marshal(v)
 		if err != nil {
 			return nil, err
 		}
-		if err := json.Unmarshal(b, info); err != nil {
+		if err := json.Unmarshal(b, result); err != nil {
 			return nil, err
 		}
-		result[k] = info
+		results[k] = result
 	}
 
-	return result, nil
+	return results, nil
 }

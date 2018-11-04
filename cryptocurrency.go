@@ -21,25 +21,58 @@ func (s *Client) CryptoInfo(options *types.Options) (map[string]*types.CryptoInf
 		return nil, err
 	}
 
-	var result = make(map[string]*types.CryptoInfo)
-	ifcs, ok := resp.Data.(map[string]interface{})
+	var results = make(map[string]*types.CryptoInfo)
+	data, ok := resp.Data.(map[string]interface{})
 	if !ok {
 		return nil, ErrCouldNotCast
 	}
 
-	for k, v := range ifcs {
-		info := new(types.CryptoInfo)
+	for k, v := range data {
+		result := new(types.CryptoInfo)
 		b, err := json.Marshal(v)
 		if err != nil {
 			return nil, err
 		}
-		if err := json.Unmarshal(b, info); err != nil {
+		if err := json.Unmarshal(b, result); err != nil {
 			return nil, err
 		}
-		result[k] = info
+		results[k] = result
 	}
 
-	return result, nil
+	return results, nil
+}
+
+// CryptoMap returns a paginated list of all cryptocurrencies by CoinMarketCap ID
+// arg: symbol, start, limit, listing_status
+// src: https://pro-api.coinmarketcap.com/v1/cryptocurrency/map
+// doc: https://pro.coinmarketcap.com/api/v1#operation/getV1CryptocurrencyMap
+func (s *Client) CryptoMap(options *types.Options) ([]*types.CryptoMap, error) {
+	url := fmt.Sprintf("%s/cryptocurrency/map?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
+
+	resp, err := s.getResponse(url)
+	if err != nil {
+		return nil, err
+	}
+
+	var results []*types.CryptoMap
+	data, ok := resp.Data.([]interface{})
+	if !ok {
+		return nil, ErrCouldNotCast
+	}
+
+	for i := range data {
+		result := new(types.CryptoMap)
+		b, err := json.Marshal(data[i])
+		if err != nil {
+			return nil, err
+		}
+		if err := json.Unmarshal(b, result); err != nil {
+			return nil, err
+		}
+		results = append(results, result)
+	}
+
+	return results, nil
 }
 
 // CryptoListingsLatest gets a paginated list of all cryptocurrencies with latest market data.
@@ -54,24 +87,23 @@ func (s *Client) CryptoListingsLatest(options *types.Options) ([]*types.CryptoLi
 		return nil, err
 	}
 
-	var listings []*types.CryptoListing
-	ifcs, ok := resp.Data.([]interface{})
+	var results []*types.CryptoListing
+	data, ok := resp.Data.([]interface{})
 	if !ok {
 		return nil, ErrCouldNotCast
 	}
 
-	for i := range ifcs {
-		ifc := ifcs[i]
-		listing := new(types.CryptoListing)
-		b, err := json.Marshal(ifc)
+	for i := range data {
+		result := new(types.CryptoListing)
+		b, err := json.Marshal(data[i])
 		if err != nil {
 			return nil, err
 		}
-		if err := json.Unmarshal(b, listing); err != nil {
+		if err := json.Unmarshal(b, result); err != nil {
 			return nil, err
 		}
-		listings = append(listings, listing)
+		results = append(results, result)
 	}
 
-	return listings, nil
+	return results, nil
 }

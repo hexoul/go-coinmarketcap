@@ -22,6 +22,18 @@ func TestCryptoInfo(t *testing.T) {
 	}
 }
 
+func TestCryptoMap(t *testing.T) {
+	info, err := GetInstance().CryptoMap(&types.Options{
+		Symbol: "BTC",
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(info) == 0 || info[0].Name != "Bitcoin" {
+		t.FailNow()
+	}
+}
+
 func TestCryptoListingsLatest(t *testing.T) {
 	listings, err := GetInstance().CryptoListingsLatest(&types.Options{
 		Limit: 1,

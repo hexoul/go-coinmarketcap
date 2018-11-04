@@ -17,6 +17,7 @@ import (
 // Interface for APIs
 type Interface interface {
 	CryptoInfo(options *types.Options) (map[string]*types.CryptoInfo, error)
+	CryptoMap(options *types.Options) (map[string]*types.CryptoMap, error)
 	CryptoListingsLatest(options *types.Options) ([]*types.CryptoListing, error)
 
 	ExchangeInfo(options *types.Options) (map[string]*types.ExchangeInfo, error)
@@ -36,10 +37,7 @@ var (
 )
 
 const (
-	baseURL               = "https://pro-api.coinmarketcap.com/v1"
-	coinGraphURL          = "https://graphs2.coinmarketcap.com/currencies"
-	globalMarketGraphURL  = "https://graphs2.coinmarketcap.com/global/marketcap-total"
-	altcoinMarketGraphURL = "https://graphs2.coinmarketcap.com/global/marketcap-altcoin"
+	baseURL = "https://pro-api.coinmarketcap.com/v1"
 )
 
 func init() {
