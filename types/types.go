@@ -49,8 +49,8 @@ type CryptoListing struct {
 	TotalSupply       float64           `json:"total_supply"`
 	MaxSupply         float64           `json:"max_supply"`
 	DateAdded         string            `json:"date_added"`
-	NumMarketPairs    float64           `json:"num_market_pairs"`
-	CMCRank           float64           `json:"cmc_rank"`
+	NumMarketPairs    int               `json:"num_market_pairs"`
+	CMCRank           int               `json:"cmc_rank"`
 	LastUpdated       string            `json:"last_updated"`
 	Quote             map[string]*Quote `json:"quote"`
 }
@@ -64,10 +64,36 @@ type ExchangeInfo struct {
 	Urls map[string]interface{} `json:"urls"`
 }
 
+// ExchangeMarketPairs structure
+type ExchangeMarketPairs struct {
+	ID             float64        `json:"id"`
+	Name           string         `json:"name"`
+	Slug           string         `json:"slug"`
+	NumMarketPairs int            `json:"num_market_pairs"`
+	MarketPairs    []*MarketPairs `json:"market_pairs"`
+}
+
+// MarketPairs structure
+type MarketPairs struct {
+	MarketPair      string            `json:"market_pair"`
+	MarketPairBase  *Currency         `json:"market_pair_base"`
+	MarketPairQuote *Currency         `json:"market_pair_quote"`
+	Quote           map[string]*Quote `json:"quote"`
+}
+
+// Currency structure
+type Currency struct {
+	ID     int    `json:"currency_id"`
+	Symbol string `json:"currency_symbol"`
+	Type   string `json:"currency_type"`
+}
+
 // Quote structure
 type Quote struct {
 	Price            float64 `json:"price"`
 	Volume24H        float64 `json:"volume_24h"`
+	Volume24Hbase    float64 `json:"volume_24h_base"`
+	Volume24Hquote   float64 `json:"volume_24h_quote"`
 	PercentChange1H  float64 `json:"percent_change_1h"`
 	PercentChange24H float64 `json:"percent_change_24h"`
 	PercentChange7D  float64 `json:"percent_change_7d"`

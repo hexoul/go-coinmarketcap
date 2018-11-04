@@ -21,3 +21,15 @@ func TestExchangeInfo(t *testing.T) {
 		t.FailNow()
 	}
 }
+
+func TestExchangeMarketPairsLatest(t *testing.T) {
+	info, err := GetInstance().ExchangeMarketPairsLatest(&types.Options{
+		Slug: "binance",
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if info.Name != "Binance" {
+		t.FailNow()
+	}
+}
