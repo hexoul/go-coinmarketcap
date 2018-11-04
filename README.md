@@ -24,7 +24,7 @@
 | Exchange       | /v1/exchange/map                       | -      |
 | Exchange       | /v1/exchange/listings/latest           | -      |
 | Exchange       | /v1/exchange/listings/historical       | -      |
-| Exchange       | /v1/exchange/market-pairs/latest       | -      |
+| Exchange       | /v1/exchange/market-pairs/latest       | YES    |
 | Exchange       | /v1/exchange/quotes/latest             | -      |
 | Exchange       | /v1/exchange/quotes/historical         | -      |
 | Global Metrics | /v1/global-metrics/quotes/latest       | -      |

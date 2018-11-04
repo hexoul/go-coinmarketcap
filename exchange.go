@@ -33,7 +33,7 @@ func (s *Client) ExchangeInfo(options *types.Options) (*types.ExchangeInfoMap, e
 // src: https://pro-api.coinmarketcap.com/v1/exchange/market-pairs/latest
 // doc: https://pro.coinmarketcap.com/api/v1#operation/getV1ExchangeMarketpairsLatest
 func (s *Client) ExchangeMarketPairsLatest(options *types.Options) (*types.ExchangeMarketPairs, error) {
-	url := fmt.Sprintf("%s/exchange/info?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
+	url := fmt.Sprintf("%s/exchange/market-pairs/latest?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
 
 	resp, _, err := s.getResponse(url)
 	if err != nil {
