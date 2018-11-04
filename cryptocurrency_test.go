@@ -16,7 +16,7 @@ func TestCryptoInfo(t *testing.T) {
 		Symbol: "BTC",
 	})
 	if err != nil {
-		t.Error(err)
+		t.Fatal(err)
 	}
 	if info["BTC"].Name != "Bitcoin" {
 		t.FailNow()
@@ -32,7 +32,7 @@ func TestCryptoListingsLatest(t *testing.T) {
 		Limit: 1,
 	})
 	if err != nil {
-		t.Error(err)
+		t.Fatal(err)
 	}
 
 	if len(listings) == 0 {

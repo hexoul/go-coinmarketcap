@@ -2,13 +2,15 @@ package types
 
 // Options for request
 type Options struct {
-	ID      string
-	Symbol  string
-	Start   int
-	Limit   int
-	Convert string
-	Sort    string
-	SortDir string
+	ID         string
+	Symbol     string
+	Slug       string
+	Start      int
+	Limit      int
+	Convert    string
+	Sort       string
+	SortDir    string
+	CryptoType string
 }
 
 // SortOptions sort options

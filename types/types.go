@@ -16,6 +16,18 @@ type Response struct {
 	Data   interface{} `json:"data"`
 }
 
+// CryptoInfo options
+type CryptoInfo struct {
+	ID       float64                `json:"id"`
+	Name     string                 `json:"name"`
+	Symbol   string                 `json:"symbol"`
+	Category string                 `json:"category"`
+	Slug     string                 `json:"slug"`
+	Logo     string                 `json:"logo"`
+	Tags     []string               `json:"tags"`
+	Urls     map[string]interface{} `json:"urls"`
+}
+
 // CryptoListing structure
 type CryptoListing struct {
 	ID                float64           `json:"id"`
@@ -32,6 +44,15 @@ type CryptoListing struct {
 	Quote             map[string]*Quote `json:"quote"`
 }
 
+// ExchangeInfo options
+type ExchangeInfo struct {
+	ID   float64                `json:"id"`
+	Name string                 `json:"name"`
+	Slug string                 `json:"slug"`
+	Logo string                 `json:"logo"`
+	Urls map[string]interface{} `json:"urls"`
+}
+
 // Quote structure
 type Quote struct {
 	Price            float64 `json:"price"`
@@ -41,18 +62,6 @@ type Quote struct {
 	PercentChange7D  float64 `json:"percent_change_7d"`
 	MarketCap        float64 `json:"market_cap"`
 	LastUpdated      string  `json:"last_updated"`
-}
-
-// CryptoInfo options
-type CryptoInfo struct {
-	ID       float64                `json:"id"`
-	Name     string                 `json:"name"`
-	Symbol   string                 `json:"symbol"`
-	Category string                 `json:"category"`
-	Slug     string                 `json:"slug"`
-	Logo     string                 `json:"logo"`
-	Tags     []string               `json:"tags"`
-	Urls     map[string]interface{} `json:"urls"`
 }
 
 // Ticker struct

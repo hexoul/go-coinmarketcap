@@ -47,6 +47,12 @@ func ParseOptions(options *types.Options) (params []string) {
 	if options.Sort != "" {
 		params = append(params, fmt.Sprintf("sort=%s", options.Sort))
 	}
+	if options.SortDir != "" {
+		params = append(params, fmt.Sprintf("sort_dir=%s", options.SortDir))
+	}
+	if options.CryptoType != "" {
+		params = append(params, fmt.Sprintf("cryptocurrency_type=%s", options.CryptoType))
+	}
 	return
 }
 
@@ -63,8 +69,6 @@ func DoReq(req *http.Request) (body []byte, err error) {
 	defer resp.Body.Close()
 	if body, err = ioutil.ReadAll(resp.Body); err != nil {
 		return nil, err
-	} else if resp != nil && resp.StatusCode != 200 {
-		err = fmt.Errorf("%s", body)
 	}
 	return
 }

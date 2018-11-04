@@ -4,6 +4,7 @@ package coinmarketcap
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"net/http"
 	"os"
 	"strings"
@@ -17,6 +18,8 @@ import (
 type Interface interface {
 	CryptoInfo(options *types.Options) (map[string]*types.CryptoInfo, error)
 	CryptoListingsLatest(options *types.Options) ([]*types.CryptoListing, error)
+
+	ExchangeInfo(options *types.Options) (map[string]*types.ExchangeInfo, error)
 }
 
 // Client the CoinMarketCap client
@@ -83,6 +86,9 @@ func (s *Client) getResponse(url string) (*types.Response, error) {
 	resp := new(types.Response)
 	if err := json.Unmarshal(body, &resp); err != nil {
 		return nil, err
+	}
+	if resp.Status.ErrorCode != 0 {
+		return nil, fmt.Errorf("%s", *resp.Status.ErrorMessage)
 	}
 	return resp, nil
 }
