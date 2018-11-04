@@ -18,10 +18,10 @@ import (
 type Interface interface {
 	CryptoInfo(options *types.Options) (*types.CryptoInfoMap, error)
 	CryptoMap(options *types.Options) (*types.CryptoMapList, error)
-	CryptoListingsLatest(options *types.Options) ([]*types.CryptoListing, error)
-	CryptoMarketQuotesLatest(options *types.Options) (map[string]*types.CryptoListing, error)
+	CryptoListingsLatest(options *types.Options) (*types.CryptoMarketList, error)
+	CryptoMarketQuotesLatest(options *types.Options) (*types.CryptoMarketMap, error)
 
-	ExchangeInfo(options *types.Options) (map[string]*types.ExchangeInfo, error)
+	ExchangeInfo(options *types.Options) (*types.ExchangeInfoMap, error)
 	ExchangeMarketPairsLatest(options *types.Options) (*types.ExchangeMarketPairs, error)
 }
 
@@ -73,22 +73,22 @@ func GetInstanceWithKey(key string) *Client {
 	return instance
 }
 
-func (s *Client) getResponse(url string) (*types.Response, error) {
+func (s *Client) getResponse(url string) (*types.Response, []byte, error) {
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 	req.Header.Add("X-CMC_PRO_API_KEY", s.proAPIKey)
 	body, err := util.DoReq(req)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 	resp := new(types.Response)
 	if err := json.Unmarshal(body, &resp); err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 	if resp.Status.ErrorCode != 0 {
-		return nil, fmt.Errorf("%s", *resp.Status.ErrorMessage)
+		return nil, nil, fmt.Errorf("%s", *resp.Status.ErrorMessage)
 	}
-	return resp, nil
+	return resp, body, nil
 }

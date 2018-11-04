@@ -49,8 +49,18 @@ type CryptoMap struct {
 	LastHistoricalData  string  `json:"last_historical_data"`
 }
 
-// CryptoListing structure
-type CryptoListing struct {
+// CryptoMarketList structure
+type CryptoMarketList struct {
+	CryptoMarket []*CryptoMarket `json:"data"`
+}
+
+// CryptoMarketMap structure
+type CryptoMarketMap struct {
+	CryptoMarket map[string]*CryptoMarket `json:"data"`
+}
+
+// CryptoMarket structure
+type CryptoMarket struct {
 	ID                float64           `json:"id"`
 	Name              string            `json:"name"`
 	Symbol            string            `json:"symbol"`
@@ -63,6 +73,11 @@ type CryptoListing struct {
 	CMCRank           int               `json:"cmc_rank"`
 	LastUpdated       string            `json:"last_updated"`
 	Quote             map[string]*Quote `json:"quote"`
+}
+
+// ExchangeInfoMap structure
+type ExchangeInfoMap struct {
+	ExchangeInfo map[string]*ExchangeInfo `json:"data"`
 }
 
 // ExchangeInfo options

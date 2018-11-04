@@ -13,33 +13,19 @@ import (
 // arg: id, slug
 // src: https://pro-api.coinmarketcap.com/v1/exchange/info
 // doc: https://pro.coinmarketcap.com/api/v1#operation/getV1ExchangeInfo
-func (s *Client) ExchangeInfo(options *types.Options) (map[string]*types.ExchangeInfo, error) {
+func (s *Client) ExchangeInfo(options *types.Options) (*types.ExchangeInfoMap, error) {
 	url := fmt.Sprintf("%s/exchange/info?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
 
-	resp, err := s.getResponse(url)
+	_, body, err := s.getResponse(url)
 	if err != nil {
 		return nil, err
 	}
 
-	var results = make(map[string]*types.ExchangeInfo)
-	data, ok := resp.Data.(map[string]interface{})
-	if !ok {
-		return nil, ErrCouldNotCast
+	result := new(types.ExchangeInfoMap)
+	if err := json.Unmarshal(body, result); err != nil {
+		return nil, err
 	}
-
-	for k, v := range data {
-		result := new(types.ExchangeInfo)
-		b, err := json.Marshal(v)
-		if err != nil {
-			return nil, err
-		}
-		if err := json.Unmarshal(b, result); err != nil {
-			return nil, err
-		}
-		results[k] = result
-	}
-
-	return results, nil
+	return result, nil
 }
 
 // ExchangeMarketPairsLatest get a list of active market pairs for an exchange.
@@ -49,17 +35,13 @@ func (s *Client) ExchangeInfo(options *types.Options) (map[string]*types.Exchang
 func (s *Client) ExchangeMarketPairsLatest(options *types.Options) (*types.ExchangeMarketPairs, error) {
 	url := fmt.Sprintf("%s/exchange/info?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
 
-	resp, err := s.getResponse(url)
+	resp, _, err := s.getResponse(url)
 	if err != nil {
 		return nil, err
 	}
 
 	var result = new(types.ExchangeMarketPairs)
-	data, ok := resp.Data.(map[string]interface{})
-	if !ok {
-		return nil, ErrCouldNotCast
-	}
-	b, err := json.Marshal(data)
+	b, err := json.Marshal(resp.Data)
 	if err != nil {
 		return nil, err
 	}

@@ -17,7 +17,7 @@ func TestExchangeInfo(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if info["binance"].Name != "Binance" {
+	if info.ExchangeInfo["binance"].Name != "Binance" {
 		t.FailNow()
 	}
 }

@@ -41,13 +41,13 @@ func TestCryptoListingsLatest(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(listings) == 0 {
+	if len(listings.CryptoMarket) == 0 {
 		t.FailNow()
 	}
-	if listings[0].Name != "Bitcoin" {
+	if listings.CryptoMarket[0].Name != "Bitcoin" {
 		t.FailNow()
 	}
-	if listings[0].Quote["USD"].Price <= 0 {
+	if listings.CryptoMarket[0].Quote["USD"].Price <= 0 {
 		t.FailNow()
 	}
 }
@@ -59,10 +59,10 @@ func TestCryptoMarketQuotesLatest(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(quotes) == 0 || len(quotes) != 2 {
+	if len(quotes.CryptoMarket) == 0 || len(quotes.CryptoMarket) != 2 {
 		t.FailNow()
 	}
-	if quotes["BTC"].Name != "Bitcoin" || quotes["ETH"].Name != "Ethereum" {
+	if quotes.CryptoMarket["BTC"].Name != "Bitcoin" || quotes.CryptoMarket["ETH"].Name != "Ethereum" {
 		t.FailNow()
 	}
 }
