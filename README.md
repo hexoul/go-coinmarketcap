@@ -9,5 +9,27 @@
 - As library, start from `coinmarketcap.GetInstanceWithKey('YOUR_API_KEY')`
 - As program, start from `coinmarketcap.GetInstance()` after executing `go run -apikey=[YOUR_API_KEY]`
 
+## Features
+| Type           | Endpoint                               | Implemented |
+|----------------|----------------------------------------|-------------|
+| Cryptocurrency | /v1/cryptocurrency/info                | YES    |
+| Cryptocurrency | /v1/cryptocurrency/map                 | -      |
+| Cryptocurrency | /v1/cryptocurrency/listings/latest     | YES    |
+| Cryptocurrency | /v1/cryptocurrency/listings/historical | -      |
+| Cryptocurrency | /v1/cryptocurrency/market-pairs/latest | -      |
+| Cryptocurrency | /v1/cryptocurrency/ohlcv/historical    | -      |
+| Cryptocurrency | /v1/cryptocurrency/quotes/latest       | -      |
+| Cryptocurrency | /v1/cryptocurrency/quotes/historical   | -      |
+| Exchange       | /v1/exchange/info                      | YES    |
+| Exchange       | /v1/exchange/map                       | -      |
+| Exchange       | /v1/exchange/listings/latest           | -      |
+| Exchange       | /v1/exchange/listings/historical       | -      |
+| Exchange       | /v1/exchange/market-pairs/latest       | -      |
+| Exchange       | /v1/exchange/quotes/latest             | -      |
+| Exchange       | /v1/exchange/quotes/historical         | -      |
+| Global Metrics | /v1/global-metrics/quotes/latest       | -      |
+| Global Metrics | /v1/global-metrics/quotes/historical   | -      |
+| Tools          | /v1/tools/price-conversion             | -      |
+
 ## Reference
 [CMC Pro](https://pro.coinmarketcap.com/api/v1)
