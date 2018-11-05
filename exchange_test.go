@@ -33,3 +33,18 @@ func TestExchangeMarketPairsLatest(t *testing.T) {
 		t.FailNow()
 	}
 }
+
+func TestExchangeMarketQuotesLatest(t *testing.T) {
+	info, err := GetInstance().ExchangeMarketQuotesLatest(&types.Options{
+		Slug: "binance",
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(info.MarketQuote) == 0 {
+		t.FailNow()
+	}
+	if info.MarketQuote["binance"].Name != "Binance" {
+		t.FailNow()
+	}
+}

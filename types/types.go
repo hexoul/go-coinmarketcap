@@ -106,6 +106,21 @@ type MarketPairs struct {
 	Quote           map[string]*Quote `json:"quote"`
 }
 
+// ExchangeMarketQuotes structure
+type ExchangeMarketQuotes struct {
+	MarketQuote map[string]*MarketQuote `json:"data"`
+}
+
+// MarketQuote structure
+type MarketQuote struct {
+	ID             float64           `json:"id"`
+	Name           string            `json:"name"`
+	Slug           string            `json:"slug"`
+	NumMarketPairs int               `json:"num_market_pairs"`
+	LastUpdated    string            `json:"last_updated"`
+	Quote          map[string]*Quote `json:"quote"`
+}
+
 // Currency structure
 type Currency struct {
 	ID     int    `json:"currency_id"`
@@ -117,11 +132,14 @@ type Currency struct {
 type Quote struct {
 	Price            float64 `json:"price"`
 	Volume24H        float64 `json:"volume_24h"`
+	Volume7D         float64 `json:"volume_7d"`
+	Volume30D        float64 `json:"volume_30d"`
 	Volume24Hbase    float64 `json:"volume_24h_base"`
 	Volume24Hquote   float64 `json:"volume_24h_quote"`
 	PercentChange1H  float64 `json:"percent_change_1h"`
 	PercentChange24H float64 `json:"percent_change_24h"`
 	PercentChange7D  float64 `json:"percent_change_7d"`
+	PercentChange30D float64 `json:"percent_change_30d"`
 	MarketCap        float64 `json:"market_cap"`
 	LastUpdated      string  `json:"last_updated"`
 }

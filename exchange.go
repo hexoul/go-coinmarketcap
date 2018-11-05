@@ -50,3 +50,22 @@ func (s *Client) ExchangeMarketPairsLatest(options *types.Options) (*types.Excha
 	}
 	return result, nil
 }
+
+// ExchangeMarketQuotesLatest gets the latest aggregate market data for 1 or more exchanges.
+// arg: id, slug, convert
+// src: https://pro-api.coinmarketcap.com/v1/exchange/quotes/latest
+// doc: https://pro.coinmarketcap.com/api/v1#operation/getV1ExchangeQuotesLatest
+func (s *Client) ExchangeMarketQuotesLatest(options *types.Options) (*types.ExchangeMarketQuotes, error) {
+	url := fmt.Sprintf("%s/exchange/quotes/latest?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
+
+	_, body, err := s.getResponse(url)
+	if err != nil {
+		return nil, err
+	}
+
+	var result = new(types.ExchangeMarketQuotes)
+	if err := json.Unmarshal(body, result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}

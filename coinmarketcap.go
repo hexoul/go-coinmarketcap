@@ -23,6 +23,7 @@ type Interface interface {
 
 	ExchangeInfo(options *types.Options) (*types.ExchangeInfoMap, error)
 	ExchangeMarketPairsLatest(options *types.Options) (*types.ExchangeMarketPairs, error)
+	ExchangeMarketQuotesLatest(options *types.Options) (*types.ExchangeMarketQuotes, error)
 }
 
 // Client the CoinMarketCap client
