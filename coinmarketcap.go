@@ -22,6 +22,7 @@ type Interface interface {
 	CryptoMarketQuotesLatest(options *types.Options) (*types.CryptoMarketMap, error)
 
 	ExchangeInfo(options *types.Options) (*types.ExchangeInfoMap, error)
+	ExchangeListingsLatest(options *types.Options) (*types.ExchangeMarketList, error)
 	ExchangeMarketPairsLatest(options *types.Options) (*types.ExchangeMarketPairs, error)
 	ExchangeMarketQuotesLatest(options *types.Options) (*types.ExchangeMarketQuotes, error)
 }
@@ -95,7 +96,7 @@ func (s *Client) getResponse(url string) (*types.Response, []byte, error) {
 		return nil, nil, err
 	}
 	if resp.Status.ErrorCode != 0 {
-		return nil, nil, fmt.Errorf("%s", *resp.Status.ErrorMessage)
+		return nil, nil, fmt.Errorf("%d %s", resp.Status.ErrorCode, *resp.Status.ErrorMessage)
 	}
 	return resp, body, nil
 }

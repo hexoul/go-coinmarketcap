@@ -53,6 +53,9 @@ func ParseOptions(options *types.Options) (params []string) {
 	if options.CryptoType != "" {
 		params = append(params, fmt.Sprintf("cryptocurrency_type=%s", options.CryptoType))
 	}
+	if options.MarketType != "" {
+		params = append(params, fmt.Sprintf("market_type=%s", options.MarketType))
+	}
 	return
 }
 

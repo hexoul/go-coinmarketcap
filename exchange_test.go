@@ -22,6 +22,21 @@ func TestExchangeInfo(t *testing.T) {
 	}
 }
 
+func TestExchangeListingsLatest(t *testing.T) {
+	info, err := GetInstance().ExchangeListingsLatest(&types.Options{
+		Limit: 2,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(info.MarketQuote) == 0 || len(info.MarketQuote) == 2 {
+		t.FailNow()
+	}
+	if info.MarketQuote[0].Name != "Binance" {
+		t.FailNow()
+	}
+}
+
 func TestExchangeMarketPairsLatest(t *testing.T) {
 	info, err := GetInstance().ExchangeMarketPairsLatest(&types.Options{
 		Slug: "binance",

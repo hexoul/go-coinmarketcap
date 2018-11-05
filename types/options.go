@@ -5,12 +5,13 @@ type Options struct {
 	ID         string
 	Symbol     string
 	Slug       string
-	Start      int
+	Start      int // >= 1
 	Limit      int
-	Convert    string
-	Sort       string
-	SortDir    string
-	CryptoType string
+	Convert    string // "USD", ...
+	Sort       string // <- SortOptions
+	SortDir    string // "asc", "desc"
+	CryptoType string // "all", "coins", "tokens"
+	MarketType string // "all", "fees", "no_fees"
 }
 
 // SortOptions sort options

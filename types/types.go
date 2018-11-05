@@ -111,6 +111,11 @@ type ExchangeMarketQuotes struct {
 	MarketQuote map[string]*MarketQuote `json:"data"`
 }
 
+// ExchangeMarketList structure
+type ExchangeMarketList struct {
+	MarketQuote []*MarketQuote `json:"data"`
+}
+
 // MarketQuote structure
 type MarketQuote struct {
 	ID             float64           `json:"id"`

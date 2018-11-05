@@ -22,7 +22,7 @@
 | Cryptocurrency | /v1/cryptocurrency/quotes/historical   | -      |
 | Exchange       | /v1/exchange/info                      | YES    |
 | Exchange       | /v1/exchange/map                       | -      |
-| Exchange       | /v1/exchange/listings/latest           | -      |
+| Exchange       | /v1/exchange/listings/latest           | YES    |
 | Exchange       | /v1/exchange/listings/historical       | -      |
 | Exchange       | /v1/exchange/market-pairs/latest       | YES    |
 | Exchange       | /v1/exchange/quotes/latest             | YES    |
