@@ -22,6 +22,7 @@ type Interface interface {
 	CryptoMarketQuotesLatest(options *types.Options) (*types.CryptoMarketMap, error)
 
 	ExchangeInfo(options *types.Options) (*types.ExchangeInfoMap, error)
+	ExchangeMap(options *types.Options) (*types.ExchangeMapList, error)
 	ExchangeListingsLatest(options *types.Options) (*types.ExchangeMarketList, error)
 	ExchangeMarketPairsLatest(options *types.Options) (*types.ExchangeMarketPairs, error)
 	ExchangeMarketQuotesLatest(options *types.Options) (*types.ExchangeMarketQuotes, error)

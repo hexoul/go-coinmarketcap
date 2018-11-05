@@ -22,6 +22,21 @@ func TestExchangeInfo(t *testing.T) {
 	}
 }
 
+func TestExchangeMap(t *testing.T) {
+	info, err := GetInstance().ExchangeMap(&types.Options{
+		Slug: "binance",
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(info.ExchangeMap) == 0 {
+		t.FailNow()
+	}
+	if info.ExchangeMap[0].Name != "Binance" {
+		t.FailNow()
+	}
+}
+
 func TestExchangeListingsLatest(t *testing.T) {
 	info, err := GetInstance().ExchangeListingsLatest(&types.Options{
 		Limit: 2,

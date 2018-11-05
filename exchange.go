@@ -28,6 +28,25 @@ func (s *Client) ExchangeInfo(options *types.Options) (*types.ExchangeInfoMap, e
 	return result, nil
 }
 
+// ExchangeMap returns a paginated list of all cryptocurrency exchanges by CoinMarketCap ID.
+// arg: slug, start, limit, listing_status
+// src: https://pro-api.coinmarketcap.com/v1/exchange/map
+// doc: https://pro.coinmarketcap.com/api/v1#operation/getV1ExchangeMap
+func (s *Client) ExchangeMap(options *types.Options) (*types.ExchangeMapList, error) {
+	url := fmt.Sprintf("%s/exchange/map?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
+
+	_, body, err := s.getResponse(url)
+	if err != nil {
+		return nil, err
+	}
+
+	result := new(types.ExchangeMapList)
+	if err := json.Unmarshal(body, result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // ExchangeListingsLatest gets a paginated list of all cryptocurrency exchanges including the latest aggregate market data for each exchange.
 // arg: start, limit, sort, sort_dir, market_type, convert
 // src: https://pro-api.coinmarketcap.com/v1/exchange/listings/latest

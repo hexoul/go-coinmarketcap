@@ -23,7 +23,7 @@ type CryptoInfoMap struct {
 
 // CryptoInfo structure
 type CryptoInfo struct {
-	ID       float64                `json:"id"`
+	ID       int                    `json:"id"`
 	Name     string                 `json:"name"`
 	Symbol   string                 `json:"symbol"`
 	Category string                 `json:"category"`
@@ -40,13 +40,13 @@ type CryptoMapList struct {
 
 // CryptoMap structure
 type CryptoMap struct {
-	ID                  float64 `json:"id"`
-	Name                string  `json:"name"`
-	Symbol              string  `json:"symbol"`
-	Slug                string  `json:"slug"`
-	IsActive            int     `json:"is_active"`
-	FirstHistoricalData string  `json:"first_historical_data"`
-	LastHistoricalData  string  `json:"last_historical_data"`
+	ID                  int    `json:"id"`
+	Name                string `json:"name"`
+	Symbol              string `json:"symbol"`
+	Slug                string `json:"slug"`
+	IsActive            int    `json:"is_active"`
+	FirstHistoricalData string `json:"first_historical_data"`
+	LastHistoricalData  string `json:"last_historical_data"`
 }
 
 // CryptoMarketList structure
@@ -61,7 +61,7 @@ type CryptoMarketMap struct {
 
 // CryptoMarket structure
 type CryptoMarket struct {
-	ID                float64           `json:"id"`
+	ID                int               `json:"id"`
 	Name              string            `json:"name"`
 	Symbol            string            `json:"symbol"`
 	Slug              string            `json:"slug"`
@@ -82,16 +82,31 @@ type ExchangeInfoMap struct {
 
 // ExchangeInfo options
 type ExchangeInfo struct {
-	ID   float64                `json:"id"`
+	ID   int                    `json:"id"`
 	Name string                 `json:"name"`
 	Slug string                 `json:"slug"`
 	Logo string                 `json:"logo"`
 	Urls map[string]interface{} `json:"urls"`
 }
 
+// ExchangeMapList options
+type ExchangeMapList struct {
+	ExchangeMap []*ExchangeMap `json:"data"`
+}
+
+// ExchangeMap options
+type ExchangeMap struct {
+	ID                  int    `json:"id"`
+	Name                string `json:"name"`
+	Slug                string `json:"slug"`
+	IsActive            int    `json:"is_active"`
+	FirstHistoricalData string `json:"first_historical_data"`
+	LastHistoricalData  string `json:"last_historical_data"`
+}
+
 // ExchangeMarketPairs structure
 type ExchangeMarketPairs struct {
-	ID             float64        `json:"id"`
+	ID             int            `json:"id"`
 	Name           string         `json:"name"`
 	Slug           string         `json:"slug"`
 	NumMarketPairs int            `json:"num_market_pairs"`
@@ -118,7 +133,7 @@ type ExchangeMarketList struct {
 
 // MarketQuote structure
 type MarketQuote struct {
-	ID             float64           `json:"id"`
+	ID             int               `json:"id"`
 	Name           string            `json:"name"`
 	Slug           string            `json:"slug"`
 	NumMarketPairs int               `json:"num_market_pairs"`
