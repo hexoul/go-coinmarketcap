@@ -7,6 +7,8 @@ import (
 	"os"
 
 	log "github.com/sirupsen/logrus"
+
+	"github.com/jasonlvhit/gocron"
 )
 
 var (
@@ -36,4 +38,11 @@ func testLog() {
 		"market":      "binance",
 		"market_pair": "ETH/BTC",
 	}).Info("TEST")
+}
+
+func testCron() {
+	gocron.Every(1).Minute().Do(testLog)
+	gocron.Every(2).Seconds().Do(testLog)
+	gocron.Every(1).Day().At("09:35").Do(testLog)
+	gocron.Start()
 }

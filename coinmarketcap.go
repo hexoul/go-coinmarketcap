@@ -56,6 +56,9 @@ func init() {
 // GetInstance returns singleton
 func GetInstance() *Client {
 	once.Do(func() {
+		if apiKey == "" {
+			panic("API KEY REQUIRED")
+		}
 		instance = &Client{
 			proAPIKey: apiKey,
 		}
@@ -66,6 +69,9 @@ func GetInstance() *Client {
 // GetInstanceWithKey returns singleton
 func GetInstanceWithKey(key string) *Client {
 	once.Do(func() {
+		if key == "" {
+			panic("API KEY REQUIRED")
+		}
 		instance = &Client{
 			proAPIKey: key,
 		}
