@@ -1,4 +1,5 @@
 // Package statistics gathers data and makes history
+// It can be useful when your API plan is under standard, not authorized to historical data
 package statistics
 
 import (
@@ -6,9 +7,11 @@ import (
 	"io"
 	"os"
 
+	"github.com/jasonlvhit/gocron"
 	log "github.com/sirupsen/logrus"
 
-	"github.com/jasonlvhit/gocron"
+	coinmarketcap "github.com/hexoul/go-coinmarketcap"
+	"github.com/hexoul/go-coinmarketcap/types"
 )
 
 var (
@@ -31,6 +34,22 @@ func init() {
 		logger.Out = os.Stdout
 	}
 	logger.SetLevel(log.InfoLevel)
+}
+
+// GatherCryptoQuote records crypto quote to log
+func GatherCryptoQuote(options *types.Options, job *gocron.Job) {
+	job.Do(taskGatherCryptoQuote, options)
+}
+
+func taskGatherCryptoQuote(options *types.Options) {
+	if data, err := coinmarketcap.GetInstance().CryptoMarketQuotesLatest(options); err == nil {
+		for _, v := range data.CryptoMarket {
+			logger.WithFields(log.Fields{
+				"symbol": v.Symbol,
+				"quote":  v.Quote,
+			}).Info("GatherCryptoQuote")
+		}
+	}
 }
 
 func testLog() {

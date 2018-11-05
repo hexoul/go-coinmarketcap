@@ -13,4 +13,5 @@
 
 *.lock
 *.log
+*.json
 vendor
