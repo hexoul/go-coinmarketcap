@@ -104,17 +104,19 @@ type ExchangeMap struct {
 	LastHistoricalData  string `json:"last_historical_data"`
 }
 
-// ExchangeMarketPairs structure
-type ExchangeMarketPairs struct {
-	ID             int            `json:"id"`
-	Name           string         `json:"name"`
-	Slug           string         `json:"slug"`
-	NumMarketPairs int            `json:"num_market_pairs"`
-	MarketPairs    []*MarketPairs `json:"market_pairs"`
-}
-
 // MarketPairs structure
 type MarketPairs struct {
+	ID             int           `json:"id"`
+	Name           string        `json:"name"`
+	Symbol         string        `json:"symbol"`
+	Slug           string        `json:"slug"`
+	NumMarketPairs int           `json:"num_market_pairs"`
+	MarketPair     []*MarketPair `json:"market_pairs"`
+}
+
+// MarketPair structure
+type MarketPair struct {
+	ExchangeInfo    *ExchangeInfo     `json:"exchange"`
 	MarketPair      string            `json:"market_pair"`
 	MarketPairBase  *Currency         `json:"market_pair_base"`
 	MarketPairQuote *Currency         `json:"market_pair_quote"`

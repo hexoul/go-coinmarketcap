@@ -52,6 +52,18 @@ func TestCryptoListingsLatest(t *testing.T) {
 	}
 }
 
+func TestCryptoMarketPairsLatest(t *testing.T) {
+	info, err := GetInstance().CryptoMarketPairsLatest(&types.Options{
+		Symbol: "BTC",
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if info.Name != "Bitcoin" {
+		t.FailNow()
+	}
+}
+
 func TestCryptoMarketQuotesLatest(t *testing.T) {
 	quotes, err := GetInstance().CryptoMarketQuotesLatest(&types.Options{
 		Symbol: "BTC,ETH",

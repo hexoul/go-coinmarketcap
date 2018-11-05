@@ -66,6 +66,29 @@ func (s *Client) CryptoListingsLatest(options *types.Options) (*types.CryptoMark
 	return result, nil
 }
 
+// CryptoMarketPairsLatest lists all market pairs for the specified cryptocurrency with associated stats.
+// arg: id, symbol, start, limit, convert
+// src: https://pro-api.coinmarketcap.com/v1/cryptocurrency/market-pairs/latest
+// doc: https://pro.coinmarketcap.com/api/v1#operation/getV1CryptocurrencyMarketpairsLatest
+func (s *Client) CryptoMarketPairsLatest(options *types.Options) (*types.MarketPairs, error) {
+	url := fmt.Sprintf("%s/cryptocurrency/market-pairs/latest?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
+
+	resp, _, err := s.getResponse(url)
+	if err != nil {
+		return nil, err
+	}
+
+	var result = new(types.MarketPairs)
+	b, err := json.Marshal(resp.Data)
+	if err != nil {
+		return nil, err
+	}
+	if err := json.Unmarshal(b, result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // CryptoMarketQuotesLatest gets the latest market quote for 1 or more cryptocurrencies.
 // arg: id, symbol, convert
 // src: https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest

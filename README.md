@@ -16,7 +16,7 @@
 | Cryptocurrency | /v1/cryptocurrency/map                 | YES    |
 | Cryptocurrency | /v1/cryptocurrency/listings/latest     | YES    |
 | Cryptocurrency | /v1/cryptocurrency/listings/historical | -      |
-| Cryptocurrency | /v1/cryptocurrency/market-pairs/latest | -      |
+| Cryptocurrency | /v1/cryptocurrency/market-pairs/latest | YES    |
 | Cryptocurrency | /v1/cryptocurrency/ohlcv/latest        | -      |
 | Cryptocurrency | /v1/cryptocurrency/ohlcv/historical    | -      |
 | Cryptocurrency | /v1/cryptocurrency/quotes/latest       | YES    |

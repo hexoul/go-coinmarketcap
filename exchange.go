@@ -70,7 +70,7 @@ func (s *Client) ExchangeListingsLatest(options *types.Options) (*types.Exchange
 // arg: id, slug, start, limit, convert
 // src: https://pro-api.coinmarketcap.com/v1/exchange/market-pairs/latest
 // doc: https://pro.coinmarketcap.com/api/v1#operation/getV1ExchangeMarketpairsLatest
-func (s *Client) ExchangeMarketPairsLatest(options *types.Options) (*types.ExchangeMarketPairs, error) {
+func (s *Client) ExchangeMarketPairsLatest(options *types.Options) (*types.MarketPairs, error) {
 	url := fmt.Sprintf("%s/exchange/market-pairs/latest?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
 
 	resp, _, err := s.getResponse(url)
@@ -78,7 +78,7 @@ func (s *Client) ExchangeMarketPairsLatest(options *types.Options) (*types.Excha
 		return nil, err
 	}
 
-	var result = new(types.ExchangeMarketPairs)
+	var result = new(types.MarketPairs)
 	b, err := json.Marshal(resp.Data)
 	if err != nil {
 		return nil, err

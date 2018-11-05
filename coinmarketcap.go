@@ -19,12 +19,13 @@ type Interface interface {
 	CryptoInfo(options *types.Options) (*types.CryptoInfoMap, error)
 	CryptoMap(options *types.Options) (*types.CryptoMapList, error)
 	CryptoListingsLatest(options *types.Options) (*types.CryptoMarketList, error)
+	CryptoMarketPairsLatest(options *types.Options) (*types.MarketPairs, error)
 	CryptoMarketQuotesLatest(options *types.Options) (*types.CryptoMarketMap, error)
 
 	ExchangeInfo(options *types.Options) (*types.ExchangeInfoMap, error)
 	ExchangeMap(options *types.Options) (*types.ExchangeMapList, error)
 	ExchangeListingsLatest(options *types.Options) (*types.ExchangeMarketList, error)
-	ExchangeMarketPairsLatest(options *types.Options) (*types.ExchangeMarketPairs, error)
+	ExchangeMarketPairsLatest(options *types.Options) (*types.MarketPairs, error)
 	ExchangeMarketQuotesLatest(options *types.Options) (*types.ExchangeMarketQuotes, error)
 }
 
@@ -97,7 +98,7 @@ func (s *Client) getResponse(url string) (*types.Response, []byte, error) {
 		return nil, nil, err
 	}
 	if resp.Status.ErrorCode != 0 {
-		return nil, nil, fmt.Errorf("%d %s", resp.Status.ErrorCode, *resp.Status.ErrorMessage)
+		return nil, nil, fmt.Errorf("[%d] %s", resp.Status.ErrorCode, *resp.Status.ErrorMessage)
 	}
 	return resp, body, nil
 }
