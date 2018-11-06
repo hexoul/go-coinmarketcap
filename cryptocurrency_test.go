@@ -1,3 +1,4 @@
+// NOTE: before testing, apply your CMC API key to init() of `coinmarketcap_test.go`
 package coinmarketcap
 
 import (
@@ -5,10 +6,6 @@ import (
 
 	"github.com/hexoul/go-coinmarketcap/types"
 )
-
-func init() {
-	GetInstanceWithKey("YOUR_API_KEY")
-}
 
 func TestCryptoInfo(t *testing.T) {
 	ret, err := GetInstance().CryptoInfo(&types.Options{
