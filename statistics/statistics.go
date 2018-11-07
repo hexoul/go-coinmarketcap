@@ -36,7 +36,7 @@ func init() {
 	logger.SetLevel(log.InfoLevel)
 }
 
-// GatherCryptoQuote records crypto quote to log
+// GatherCryptoQuote records crypto quote
 func GatherCryptoQuote(options *types.Options, job *gocron.Job) {
 	job.Do(taskGatherCryptoQuote, options)
 }
@@ -50,6 +50,17 @@ func taskGatherCryptoQuote(options *types.Options) {
 			}).Info("GatherCryptoQuote")
 		}
 	}
+}
+
+// GatherTokenMetric records the number of token holders and transfers
+func GatherTokenMetric(symbol, addr string, job *gocron.Job) {
+	job.Do(taskGatherTokenMetric, symbol, addr)
+}
+
+// symbol: Token symbol for log
+// addr: Token contract address
+func taskGatherTokenMetric(symbol, addr string) {
+	fmt.Println(symbol, addr)
 }
 
 func testLog() {

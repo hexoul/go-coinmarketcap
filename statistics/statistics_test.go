@@ -30,3 +30,9 @@ func TestGatherCryptoQuote(t *testing.T) {
 	gocron.Start()
 	time.Sleep(30 * time.Second)
 }
+
+func TestGatherTokenMetric(t *testing.T) {
+	GatherTokenMetric("BNB", "0xB8c77482e45F1F44dE1745F52C74426C631bDD52", gocron.Every(10).Seconds())
+	gocron.Start()
+	time.Sleep(30 * time.Second)
+}
