@@ -8,6 +8,7 @@ import (
 	"os"
 	"strings"
 
+	kucoin "github.com/eeonevision/kucoin-go"
 	"github.com/gocolly/colly"
 	"github.com/jasonlvhit/gocron"
 	log "github.com/sirupsen/logrus"
@@ -90,4 +91,19 @@ func taskGatherTokenMetric(symbol, addr string) {
 		"holders": holders,
 		"txns":    txns,
 	}).Info("GatherTokenMetric")
+}
+
+// GatherKucoinBalance records a balance of Kucoin account
+func GatherKucoinBalance(k *kucoin.Kucoin, symbol string, job *gocron.Job) {
+	job.Do(taskGatherKucoinBalance, k, symbol)
+}
+
+func taskGatherKucoinBalance(k *kucoin.Kucoin, symbol string) {
+	if bal, err := k.GetCoinBalance(symbol); err == nil {
+		logger.WithFields(log.Fields{
+			"symbol":  symbol,
+			"balance": bal.Balance,
+			"freeze":  bal.FreezeBalance,
+		}).Info("GatherKucoinBalance")
+	}
 }
