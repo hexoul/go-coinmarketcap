@@ -10,27 +10,27 @@
 - As program, start from `coinmarketcap.GetInstance()` after executing `go run -apikey=[YOUR_API_KEY]`
 
 ## Features
-| Type           | Endpoint                               | Implemented |
+| Type           | Endpoint                               | Done |
 |----------------|----------------------------------------|-------------|
-| Cryptocurrency | /v1/cryptocurrency/info                | YES    |
-| Cryptocurrency | /v1/cryptocurrency/map                 | YES    |
-| Cryptocurrency | /v1/cryptocurrency/listings/latest     | YES    |
-| Cryptocurrency | /v1/cryptocurrency/listings/historical | -      |
-| Cryptocurrency | /v1/cryptocurrency/market-pairs/latest | YES    |
-| Cryptocurrency | /v1/cryptocurrency/ohlcv/latest        | -      |
-| Cryptocurrency | /v1/cryptocurrency/ohlcv/historical    | -      |
-| Cryptocurrency | /v1/cryptocurrency/quotes/latest       | YES    |
-| Cryptocurrency | /v1/cryptocurrency/quotes/historical   | -      |
-| Exchange       | /v1/exchange/info                      | YES    |
-| Exchange       | /v1/exchange/map                       | YES    |
-| Exchange       | /v1/exchange/listings/latest           | YES    |
-| Exchange       | /v1/exchange/listings/historical       | -      |
-| Exchange       | /v1/exchange/market-pairs/latest       | YES    |
-| Exchange       | /v1/exchange/quotes/latest             | YES    |
-| Exchange       | /v1/exchange/quotes/historical         | -      |
-| Global Metrics | /v1/global-metrics/quotes/latest       | -      |
-| Global Metrics | /v1/global-metrics/quotes/historical   | -      |
-| Tools          | /v1/tools/price-conversion             | -      |
+| Cryptocurrency | /v1/cryptocurrency/info                | ✔ |
+| Cryptocurrency | /v1/cryptocurrency/map                 | ✔ |
+| Cryptocurrency | /v1/cryptocurrency/listings/latest     | ✔ |
+| Cryptocurrency | /v1/cryptocurrency/listings/historical | X |
+| Cryptocurrency | /v1/cryptocurrency/market-pairs/latest | ✔ |
+| Cryptocurrency | /v1/cryptocurrency/ohlcv/latest        | X |
+| Cryptocurrency | /v1/cryptocurrency/ohlcv/historical    | X |
+| Cryptocurrency | /v1/cryptocurrency/quotes/latest       | ✔ |
+| Cryptocurrency | /v1/cryptocurrency/quotes/historical   | X |
+| Exchange       | /v1/exchange/info                      | ✔ |
+| Exchange       | /v1/exchange/map                       | ✔ |
+| Exchange       | /v1/exchange/listings/latest           | ✔ |
+| Exchange       | /v1/exchange/listings/historical       | X |
+| Exchange       | /v1/exchange/market-pairs/latest       | ✔ |
+| Exchange       | /v1/exchange/quotes/latest             | ✔ |
+| Exchange       | /v1/exchange/quotes/historical         | X |
+| Global Metrics | /v1/global-metrics/quotes/latest       | X |
+| Global Metrics | /v1/global-metrics/quotes/historical   | X |
+| Tools          | /v1/tools/price-conversion             | X |
 
 ## Reference
 [Coinmarketcap (CMC) Pro](https://pro.coinmarketcap.com/api/v1)

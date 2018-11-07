@@ -35,3 +35,10 @@ func TestGatherKucoinBalance(t *testing.T) {
 	gocron.Start()
 	time.Sleep(20 * time.Second)
 }
+
+func TestKucoinListMergedDealtOrders(t *testing.T) {
+	k := kucoin.New("API_KEY", "API_SECRET")
+	if ret, err := k.ListMergedDealtOrders("ETH-BTC", "BUY", 20, 1, 0, 0); err == nil {
+		t.Logf("%v\n", ret)
+	}
+}
