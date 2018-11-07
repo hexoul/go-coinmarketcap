@@ -65,6 +65,7 @@ func GatherTokenMetric(symbol, addr string, job *gocron.Job) {
 // c: Scraper
 func taskGatherTokenMetric(symbol, addr string) {
 	var holders, txns string
+
 	// Initialize collector
 	url1 := "https://etherscan.io/token/" + addr
 	url2 := "https://etherscan.io/address/" + addr
@@ -72,7 +73,7 @@ func taskGatherTokenMetric(symbol, addr string) {
 	c1 := colly.NewCollector()
 	c2 := colly.NewCollector()
 
-	c1.OnHTML(".table tbody #ContentPlaceHolder1_tr_tokenHolders", func(e *colly.HTMLElement) {
+	c1.OnHTML("#ContentPlaceHolder1_tr_tokenHolders", func(e *colly.HTMLElement) {
 		holders = strings.Split(e.ChildText("td:nth-of-type(2)"), " ")[0]
 	})
 	c2.OnHTML(".table tbody tr td span", func(e *colly.HTMLElement) {
@@ -89,18 +90,4 @@ func taskGatherTokenMetric(symbol, addr string) {
 		"holders": holders,
 		"txns":    txns,
 	}).Info("GatherTokenMetric")
-}
-
-func testLog() {
-	logger.WithFields(log.Fields{
-		"market":      "binance",
-		"market_pair": "ETH/BTC",
-	}).Info("TEST")
-}
-
-func testCron() {
-	gocron.Every(1).Minute().Do(testLog)
-	gocron.Every(2).Seconds().Do(testLog)
-	gocron.Every(1).Day().At("09:35").Do(testLog)
-	gocron.Start()
 }
