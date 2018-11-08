@@ -22,6 +22,16 @@ var (
 )
 
 func init() {
+	logPath := "./report.log"
+	for _, val := range os.Args {
+		arg := strings.Split(val, "=")
+		if len(arg) < 2 {
+			continue
+		} else if arg[0] == "-logpath" {
+			logPath = arg[1]
+		}
+	}
+
 	// Initialize logger
 	logger = log.New()
 
@@ -30,7 +40,7 @@ func init() {
 	logger.Formatter = &log.JSONFormatter{
 		TimestampFormat: timestampFormat,
 	}
-	if f, err := os.OpenFile("./report.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0666); err == nil {
+	if f, err := os.OpenFile(logPath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0666); err == nil {
 		logger.Out = io.MultiWriter(f, os.Stdout)
 	} else {
 		fmt.Print("Failed to open log file: you can miss important log")
