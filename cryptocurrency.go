@@ -10,9 +10,9 @@ import (
 )
 
 // CryptoInfo returns all static metadata for one or more cryptocurrencies
-// arg: id, symbol
-// src: https://pro-api.coinmarketcap.com/v1/cryptocurrency/info
-// doc: https://pro.coinmarketcap.com/api/v1#operation/getV1CryptocurrencyInfo
+//   arg: id, symbol
+//   src: https://pro-api.coinmarketcap.com/v1/cryptocurrency/info
+//   doc: https://pro.coinmarketcap.com/api/v1#operation/getV1CryptocurrencyInfo
 func (s *Client) CryptoInfo(options *types.Options) (*types.CryptoInfoMap, error) {
 	url := fmt.Sprintf("%s/cryptocurrency/info?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
 
@@ -29,9 +29,9 @@ func (s *Client) CryptoInfo(options *types.Options) (*types.CryptoInfoMap, error
 }
 
 // CryptoMap returns a paginated list of all cryptocurrencies by CoinMarketCap ID
-// arg: symbol, start, limit, listing_status
-// src: https://pro-api.coinmarketcap.com/v1/cryptocurrency/map
-// doc: https://pro.coinmarketcap.com/api/v1#operation/getV1CryptocurrencyMap
+//   arg: symbol, start, limit, listing_status
+//   src: https://pro-api.coinmarketcap.com/v1/cryptocurrency/map
+//   doc: https://pro.coinmarketcap.com/api/v1#operation/getV1CryptocurrencyMap
 func (s *Client) CryptoMap(options *types.Options) (*types.CryptoMapList, error) {
 	url := fmt.Sprintf("%s/cryptocurrency/map?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
 
@@ -48,9 +48,9 @@ func (s *Client) CryptoMap(options *types.Options) (*types.CryptoMapList, error)
 }
 
 // CryptoListingsLatest gets a paginated list of all cryptocurrencies with latest market data.
-// arg: start, limit, convert, sort, sort_dir, cryptocurrency_type
-// src: https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest
-// doc: https://pro.coinmarketcap.com/api/v1#operation/getV1CryptocurrencyListingsLatest
+//   arg: start, limit, convert, sort, sort_dir, cryptocurrency_type
+//   src: https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest
+//   doc: https://pro.coinmarketcap.com/api/v1#operation/getV1CryptocurrencyListingsLatest
 func (s *Client) CryptoListingsLatest(options *types.Options) (*types.CryptoMarketList, error) {
 	url := fmt.Sprintf("%s/cryptocurrency/listings/latest?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
 
@@ -67,9 +67,9 @@ func (s *Client) CryptoListingsLatest(options *types.Options) (*types.CryptoMark
 }
 
 // CryptoMarketPairsLatest lists all market pairs for the specified cryptocurrency with associated stats.
-// arg: id, symbol, start, limit, convert
-// src: https://pro-api.coinmarketcap.com/v1/cryptocurrency/market-pairs/latest
-// doc: https://pro.coinmarketcap.com/api/v1#operation/getV1CryptocurrencyMarketpairsLatest
+//   arg: id, symbol, start, limit, convert
+//   src: https://pro-api.coinmarketcap.com/v1/cryptocurrency/market-pairs/latest
+//   doc: https://pro.coinmarketcap.com/api/v1#operation/getV1CryptocurrencyMarketpairsLatest
 func (s *Client) CryptoMarketPairsLatest(options *types.Options) (*types.MarketPairs, error) {
 	url := fmt.Sprintf("%s/cryptocurrency/market-pairs/latest?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
 
@@ -90,9 +90,9 @@ func (s *Client) CryptoMarketPairsLatest(options *types.Options) (*types.MarketP
 }
 
 // CryptoMarketQuotesLatest gets the latest market quote for 1 or more cryptocurrencies.
-// arg: id, symbol, convert
-// src: https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest
-// doc: https://pro.coinmarketcap.com/api/v1#operation/getV1CryptocurrencyQuotesLatest
+//   arg: id, symbol, convert
+//   src: https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest
+//   doc: https://pro.coinmarketcap.com/api/v1#operation/getV1CryptocurrencyQuotesLatest
 func (s *Client) CryptoMarketQuotesLatest(options *types.Options) (*types.CryptoMarketMap, error) {
 	url := fmt.Sprintf("%s/cryptocurrency/quotes/latest?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
 

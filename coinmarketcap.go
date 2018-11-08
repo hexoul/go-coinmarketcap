@@ -3,7 +3,6 @@ package coinmarketcap
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"net/http"
 	"os"
@@ -29,7 +28,7 @@ type Interface interface {
 	ExchangeMarketQuotesLatest(options *types.Options) (*types.ExchangeMarketQuotes, error)
 }
 
-// Client the CoinMarketCap client
+// Client for CoinMarketCap API
 type Client struct {
 	proAPIKey string
 }
@@ -38,8 +37,6 @@ var (
 	instance *Client
 	once     sync.Once
 	apiKey   string
-	// ErrCouldNotCast could not cast error
-	ErrCouldNotCast = errors.New("could not cast")
 )
 
 const (

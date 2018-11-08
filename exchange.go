@@ -10,9 +10,9 @@ import (
 )
 
 // ExchangeInfo returns all static metadata for one or more exchanges including logo and homepage URL.
-// arg: id, slug
-// src: https://pro-api.coinmarketcap.com/v1/exchange/info
-// doc: https://pro.coinmarketcap.com/api/v1#operation/getV1ExchangeInfo
+//   arg: id, slug
+//   src: https://pro-api.coinmarketcap.com/v1/exchange/info
+//   doc: https://pro.coinmarketcap.com/api/v1#operation/getV1ExchangeInfo
 func (s *Client) ExchangeInfo(options *types.Options) (*types.ExchangeInfoMap, error) {
 	url := fmt.Sprintf("%s/exchange/info?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
 
@@ -29,9 +29,9 @@ func (s *Client) ExchangeInfo(options *types.Options) (*types.ExchangeInfoMap, e
 }
 
 // ExchangeMap returns a paginated list of all cryptocurrency exchanges by CoinMarketCap ID.
-// arg: slug, start, limit, listing_status
-// src: https://pro-api.coinmarketcap.com/v1/exchange/map
-// doc: https://pro.coinmarketcap.com/api/v1#operation/getV1ExchangeMap
+//   arg: slug, start, limit, listing_status
+//   src: https://pro-api.coinmarketcap.com/v1/exchange/map
+//   doc: https://pro.coinmarketcap.com/api/v1#operation/getV1ExchangeMap
 func (s *Client) ExchangeMap(options *types.Options) (*types.ExchangeMapList, error) {
 	url := fmt.Sprintf("%s/exchange/map?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
 
@@ -48,9 +48,9 @@ func (s *Client) ExchangeMap(options *types.Options) (*types.ExchangeMapList, er
 }
 
 // ExchangeListingsLatest gets a paginated list of all cryptocurrency exchanges including the latest aggregate market data for each exchange.
-// arg: start, limit, sort, sort_dir, market_type, convert
-// src: https://pro-api.coinmarketcap.com/v1/exchange/listings/latest
-// doc: https://pro.coinmarketcap.com/api/v1#operation/getV1ExchangeListingsLatest
+//   arg: start, limit, sort, sort_dir, market_type, convert
+//   src: https://pro-api.coinmarketcap.com/v1/exchange/listings/latest
+//   doc: https://pro.coinmarketcap.com/api/v1#operation/getV1ExchangeListingsLatest
 func (s *Client) ExchangeListingsLatest(options *types.Options) (*types.ExchangeMarketList, error) {
 	url := fmt.Sprintf("%s/exchange/listings/latest?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
 
@@ -67,9 +67,9 @@ func (s *Client) ExchangeListingsLatest(options *types.Options) (*types.Exchange
 }
 
 // ExchangeMarketPairsLatest get a list of active market pairs for an exchange.
-// arg: id, slug, start, limit, convert
-// src: https://pro-api.coinmarketcap.com/v1/exchange/market-pairs/latest
-// doc: https://pro.coinmarketcap.com/api/v1#operation/getV1ExchangeMarketpairsLatest
+//   arg: id, slug, start, limit, convert
+//   src: https://pro-api.coinmarketcap.com/v1/exchange/market-pairs/latest
+//   doc: https://pro.coinmarketcap.com/api/v1#operation/getV1ExchangeMarketpairsLatest
 func (s *Client) ExchangeMarketPairsLatest(options *types.Options) (*types.MarketPairs, error) {
 	url := fmt.Sprintf("%s/exchange/market-pairs/latest?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
 
@@ -90,9 +90,9 @@ func (s *Client) ExchangeMarketPairsLatest(options *types.Options) (*types.Marke
 }
 
 // ExchangeMarketQuotesLatest gets the latest aggregate market data for 1 or more exchanges.
-// arg: id, slug, convert
-// src: https://pro-api.coinmarketcap.com/v1/exchange/quotes/latest
-// doc: https://pro.coinmarketcap.com/api/v1#operation/getV1ExchangeQuotesLatest
+//   arg: id, slug, convert
+//   src: https://pro-api.coinmarketcap.com/v1/exchange/quotes/latest
+//   doc: https://pro.coinmarketcap.com/api/v1#operation/getV1ExchangeQuotesLatest
 func (s *Client) ExchangeMarketQuotesLatest(options *types.Options) (*types.ExchangeMarketQuotes, error) {
 	url := fmt.Sprintf("%s/exchange/quotes/latest?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
 
