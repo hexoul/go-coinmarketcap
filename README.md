@@ -7,7 +7,7 @@
 
 ## Usage
 - As library, start from `coinmarketcap.GetInstanceWithKey('YOUR_API_KEY')`
-- As program, start from `coinmarketcap.GetInstance()` after executing `go run -apikey=[YOUR_API_KEY]`
+- As program, start from `coinmarketcap.GetInstance()` after executing `go run -cmcApikey=[YOUR_API_KEY]`
 
 ## Features
 | Type           | Endpoint                               | Done |

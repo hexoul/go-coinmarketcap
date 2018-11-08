@@ -48,7 +48,7 @@ func init() {
 		arg := strings.Split(val, "=")
 		if len(arg) < 2 {
 			continue
-		} else if arg[0] == "-apikey" {
+		} else if arg[0] == "-cmcApikey" {
 			apiKey = arg[1]
 		}
 	}
