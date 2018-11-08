@@ -41,7 +41,7 @@ func TestExchangeListingsLatest(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(info.MarketQuote) == 0 || len(info.MarketQuote) == 2 {
+	if len(info.MarketQuote) < 2 {
 		t.FailNow()
 	}
 	if info.MarketQuote[0].Name != "Binance" {

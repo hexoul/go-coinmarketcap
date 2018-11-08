@@ -35,6 +35,9 @@ func ParseOptions(options *types.Options) (params []string) {
 	if options.Symbol != "" {
 		params = append(params, fmt.Sprintf("symbol=%s", options.Symbol))
 	}
+	if options.Slug != "" {
+		params = append(params, fmt.Sprintf("slug=%s", options.Slug))
+	}
 	if options.Start != 0 {
 		params = append(params, fmt.Sprintf("start=%d", options.Start))
 	}
