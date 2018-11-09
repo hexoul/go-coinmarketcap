@@ -15,6 +15,7 @@ import (
 
 	coinmarketcap "github.com/hexoul/go-coinmarketcap"
 	"github.com/hexoul/go-coinmarketcap/types"
+	"github.com/hexoul/go-coinmarketcap/util"
 )
 
 var (
@@ -75,7 +76,15 @@ func GatherTokenMetric(symbol, addr string, job *gocron.Job) {
 // url: Target url to scraper
 // c: Scraper
 func taskGatherTokenMetric(symbol, addr string) {
-	var holders, txns string
+	var holders, txns, transfers string
+
+	// Chromedp
+	util.InvokeChromedp(
+		`https://etherscan.io/token/0xB8c77482e45F1F44dE1745F52C74426C631bDD52`,
+		`#ContentPlaceHolder1_divSummary td span#totaltxns`,
+		&transfers,
+		10,
+	)
 
 	// Initialize collector
 	url1 := "https://etherscan.io/token/" + addr
@@ -97,9 +106,10 @@ func taskGatherTokenMetric(symbol, addr string) {
 	c2.Visit(url2)
 
 	logger.WithFields(log.Fields{
-		"symbol":  symbol,
-		"holders": holders,
-		"txns":    txns,
+		"symbol":    symbol,
+		"holders":   holders,
+		"transfers": transfers,
+		"txns":      txns,
 	}).Info("GatherTokenMetric")
 }
 
