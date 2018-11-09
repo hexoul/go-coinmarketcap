@@ -29,15 +29,11 @@ func TestParseOptions(t *testing.T) {
 }
 
 func TestDp(t *testing.T) {
-
-	// create context
 	ctxt, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	// create chrome instance
 	dp, _ := chromedp.New(ctxt)
 
-	// run task list
 	var res string
 	dp.Run(ctxt, chromedp.Tasks{
 		chromedp.Navigate(`https://etherscan.io/token/0xB8c77482e45F1F44dE1745F52C74426C631bDD52`),
@@ -45,11 +41,10 @@ func TestDp(t *testing.T) {
 		chromedp.Text(`#ContentPlaceHolder1_divSummary td span#totaltxns`, &res, chromedp.ByID),
 	})
 
-	// shutdown chrome
 	dp.Shutdown(ctxt)
-
-	// wait for chrome to finish
 	dp.Wait()
 
-	log.Printf("transfers: %s", res)
+	if res == "" {
+		t.FailNow()
+	}
 }
