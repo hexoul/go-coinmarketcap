@@ -26,11 +26,11 @@ type CryptoInfo struct {
 	ID       int                    `json:"id"`
 	Name     string                 `json:"name"`
 	Symbol   string                 `json:"symbol"`
-	Category string                 `json:"category"`
 	Slug     string                 `json:"slug"`
-	Logo     string                 `json:"logo"`
-	Tags     []string               `json:"tags"`
-	Urls     map[string]interface{} `json:"urls"`
+	Category string                 `json:"category,omitempty"`
+	Logo     string                 `json:"logo,omitempty"`
+	Tags     []string               `json:"tags,omitempty"`
+	Urls     map[string]interface{} `json:"urls,omitempty"`
 }
 
 // CryptoMapList structure
@@ -85,8 +85,8 @@ type ExchangeInfo struct {
 	ID   int                    `json:"id"`
 	Name string                 `json:"name"`
 	Slug string                 `json:"slug"`
-	Logo string                 `json:"logo"`
-	Urls map[string]interface{} `json:"urls"`
+	Logo string                 `json:"logo,omitempty"`
+	Urls map[string]interface{} `json:"urls,omitempty"`
 }
 
 // ExchangeMapList options
@@ -152,17 +152,17 @@ type Currency struct {
 
 // Quote structure
 type Quote struct {
-	Price            float64 `json:"price"`
-	Volume24H        float64 `json:"volume_24h"`
-	Volume7D         float64 `json:"volume_7d"`
-	Volume30D        float64 `json:"volume_30d"`
-	Volume24Hbase    float64 `json:"volume_24h_base"`
-	Volume24Hquote   float64 `json:"volume_24h_quote"`
-	PercentChange1H  float64 `json:"percent_change_1h"`
-	PercentChange24H float64 `json:"percent_change_24h"`
-	PercentChange7D  float64 `json:"percent_change_7d"`
-	PercentChange30D float64 `json:"percent_change_30d"`
-	MarketCap        float64 `json:"market_cap"`
+	Price            float64 `json:"price,omitempty"`
+	Volume24H        float64 `json:"volume_24h,omitempty"`
+	Volume7D         float64 `json:"volume_7d,omitempty"`
+	Volume30D        float64 `json:"volume_30d,omitempty"`
+	Volume24Hbase    float64 `json:"volume_24h_base,omitempty"`
+	Volume24Hquote   float64 `json:"volume_24h_quote,omitempty"`
+	PercentChange1H  float64 `json:"percent_change_1h,omitempty"`
+	PercentChange24H float64 `json:"percent_change_24h,omitempty"`
+	PercentChange7D  float64 `json:"percent_change_7d,omitempty"`
+	PercentChange30D float64 `json:"percent_change_30d,omitempty"`
+	MarketCap        float64 `json:"market_cap,omitempty"`
 	LastUpdated      string  `json:"last_updated"`
 }
 
