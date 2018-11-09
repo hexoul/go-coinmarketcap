@@ -2,13 +2,16 @@
 package util
 
 import (
+	"context"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
 
+	"github.com/chromedp/chromedp"
 	"github.com/hexoul/go-coinmarketcap/types"
 )
 
@@ -77,4 +80,42 @@ func DoReq(req *http.Request) (body []byte, err error) {
 		return nil, err
 	}
 	return
+}
+
+// InvokeChromedp for transfers
+func InvokeChromedp(url, qeury string, buffer *string, sec int) {
+	var err error
+	// create context
+	ctxt, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	// create chrome instance, Not appeared error form : chromedp.New(ctxt, chromedp.WithLog(log.Printf))
+	dp, err := chromedp.New(ctxt)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// run task list
+	err = dp.Run(ctxt, chromedp.Tasks{
+		chromedp.Navigate(url),
+		chromedp.Sleep(time.Duration(sec) * time.Second),
+		chromedp.Text(qeury, buffer, chromedp.ByID),
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// shutdown chrome
+	err = dp.Shutdown(ctxt)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// wait for chrome to finish
+	err = dp.Wait()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Printf("transfers: %s", *buffer)
 }
