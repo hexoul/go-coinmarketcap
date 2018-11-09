@@ -32,9 +32,9 @@ func TestGatherExchangeMarketPairs(t *testing.T) {
 }
 
 func TestGatherTokenMetric(t *testing.T) {
-	GatherTokenMetric("BNB", "0xB8c77482e45F1F44dE1745F52C74426C631bDD52", gocron.Every(1).Second())
+	GatherTokenMetric("BNB", "0xB8c77482e45F1F44dE1745F52C74426C631bDD52", gocron.Every(20).Seconds())
 	gocron.Start()
-	time.Sleep(5 * time.Second)
+	time.Sleep(35 * time.Second)
 }
 
 func TestGatherKucoinBalance(t *testing.T) {

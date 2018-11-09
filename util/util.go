@@ -2,13 +2,16 @@
 package util
 
 import (
+	"context"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
 
+	"github.com/chromedp/chromedp"
 	"github.com/hexoul/go-coinmarketcap/types"
 )
 
@@ -77,4 +80,36 @@ func DoReq(req *http.Request) (body []byte, err error) {
 		return nil, err
 	}
 	return
+}
+
+// InvokeChromedp for scraping AJAX page
+func InvokeChromedp(url, qeury string, buffer *string, sec int) (err error) {
+	// Create context
+	ctxt, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	// NOTE: not appeared error form => chromedp.New(ctxt, chromedp.WithLog(log.Printf))
+	dp, err := chromedp.New(ctxt)
+	if err != nil {
+		return err
+	}
+
+	// Run task list
+	if err = dp.Run(ctxt, chromedp.Tasks{
+		chromedp.Navigate(url),
+		chromedp.Sleep(time.Duration(sec) * time.Second),
+		chromedp.Text(qeury, buffer, chromedp.ByID),
+	}); err != nil {
+		return
+	}
+
+	// shutdown chrome
+	if err = dp.Shutdown(ctxt); err != nil {
+		return
+	}
+
+	// wait for chrome to finish
+	if err = dp.Wait(); err != nil {
+		return
+	}
 }
