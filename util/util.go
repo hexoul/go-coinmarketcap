@@ -82,40 +82,34 @@ func DoReq(req *http.Request) (body []byte, err error) {
 	return
 }
 
-// InvokeChromedp for transfers
-func InvokeChromedp(url, qeury string, buffer *string, sec int) {
-	var err error
-	// create context
+// InvokeChromedp for scraping AJAX page
+func InvokeChromedp(url, qeury string, buffer *string, sec int) (err error) {
+	// Create context
 	ctxt, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	// create chrome instance, Not appeared error form : chromedp.New(ctxt, chromedp.WithLog(log.Printf))
+	// NOTE: not appeared error form => chromedp.New(ctxt, chromedp.WithLog(log.Printf))
 	dp, err := chromedp.New(ctxt)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
-	// run task list
-	err = dp.Run(ctxt, chromedp.Tasks{
+	// Run task list
+	if err = dp.Run(ctxt, chromedp.Tasks{
 		chromedp.Navigate(url),
 		chromedp.Sleep(time.Duration(sec) * time.Second),
 		chromedp.Text(qeury, buffer, chromedp.ByID),
-	})
-	if err != nil {
-		log.Fatal(err)
+	}); err != nil {
+		return
 	}
 
 	// shutdown chrome
-	err = dp.Shutdown(ctxt)
-	if err != nil {
-		log.Fatal(err)
+	if err = dp.Shutdown(ctxt); err != nil {
+		return
 	}
 
 	// wait for chrome to finish
-	err = dp.Wait()
-	if err != nil {
-		log.Fatal(err)
+	if err = dp.Wait(); err != nil {
+		return
 	}
-
-	log.Printf("transfers: %s", *buffer)
 }
