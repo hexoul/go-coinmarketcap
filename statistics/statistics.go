@@ -77,6 +77,7 @@ func taskGatherExchangeMarketPairs(options *types.Options, targetSymbol string) 
 			if strings.Contains(pair.MarketPair, targetSymbol) {
 				logger.WithFields(log.Fields{
 					"symbol": targetSymbol,
+					"market": data.Slug,
 					"pair":   pair.MarketPair,
 					"quote":  pair.Quote,
 				}).Info("GatherExchangeMarketPairs")
