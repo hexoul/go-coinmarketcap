@@ -2,7 +2,6 @@ package util
 
 import (
 	"context"
-	"log"
 	"testing"
 	"time"
 
@@ -36,9 +35,9 @@ func TestDp(t *testing.T) {
 
 	var res string
 	dp.Run(ctxt, chromedp.Tasks{
-		chromedp.Navigate(`https://etherscan.io/token/0xB8c77482e45F1F44dE1745F52C74426C631bDD52`),
+		chromedp.Navigate("https://etherscan.io/token/0xB8c77482e45F1F44dE1745F52C74426C631bDD52"),
 		chromedp.Sleep(10 * time.Second),
-		chromedp.Text(`#ContentPlaceHolder1_divSummary td span#totaltxns`, &res, chromedp.ByID),
+		chromedp.Text("#ContentPlaceHolder1_divSummary td span#totaltxns", &res, chromedp.ByID),
 	})
 
 	dp.Shutdown(ctxt)

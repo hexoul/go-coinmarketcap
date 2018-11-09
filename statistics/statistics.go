@@ -97,18 +97,19 @@ func GatherTokenMetric(symbol, addr string, job *gocron.Job) {
 func taskGatherTokenMetric(symbol, addr string) {
 	var holders, txns, transfers string
 
-	// Chromedp
-	util.InvokeChromedp(
-		`https://etherscan.io/token/0xB8c77482e45F1F44dE1745F52C74426C631bDD52`,
-		`#ContentPlaceHolder1_divSummary td span#totaltxns`,
-		&transfers,
-		10,
-	)
-
-	// Initialize collector
+	// Target urls
 	url1 := "https://etherscan.io/token/" + addr
 	url2 := "https://etherscan.io/address/" + addr
 
+	// Invoke chromedp
+	util.InvokeChromedp(
+		url1,
+		"#ContentPlaceHolder1_divSummary td span#totaltxns",
+		5,
+		&transfers,
+	)
+
+	// Initialize collector
 	c1 := colly.NewCollector()
 	c2 := colly.NewCollector()
 
