@@ -65,6 +65,25 @@ func taskGatherCryptoQuote(options *types.Options) {
 	}
 }
 
+// GatherExchangeMarketPairs records exchange quotes
+func GatherExchangeMarketPairs(options *types.Options, targetSymbol string, job *gocron.Job) {
+	job.Do(taskGatherExchangeMarketPairs, options, targetSymbol)
+}
+
+func taskGatherExchangeMarketPairs(options *types.Options, targetSymbol string) {
+	if data, err := coinmarketcap.GetInstance().ExchangeMarketPairsLatest(options); err == nil {
+		for _, pair := range data.MarketPair {
+			if strings.Contains(pair.MarketPair, targetSymbol) {
+				logger.WithFields(log.Fields{
+					"symbol": targetSymbol,
+					"pair":   pair.MarketPair,
+					"quote":  pair.Quote,
+				}).Info("GatherExchangeMarketPairs")
+			}
+		}
+	}
+}
+
 // GatherTokenMetric records the number of token holders and transactions
 func GatherTokenMetric(symbol, addr string, job *gocron.Job) {
 	job.Do(taskGatherTokenMetric, symbol, addr)

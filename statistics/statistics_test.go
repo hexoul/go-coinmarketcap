@@ -20,7 +20,15 @@ func TestGatherCryptoQuote(t *testing.T) {
 		Symbol: "BTC",
 	}, gocron.Every(10).Seconds())
 	gocron.Start()
-	time.Sleep(20 * time.Second)
+	time.Sleep(15 * time.Second)
+}
+
+func TestGatherExchangeMarketPairs(t *testing.T) {
+	GatherExchangeMarketPairs(&types.Options{
+		Slug: "binance",
+	}, "ETH", gocron.Every(10).Seconds())
+	gocron.Start()
+	time.Sleep(15 * time.Second)
 }
 
 func TestGatherTokenMetric(t *testing.T) {
@@ -33,7 +41,7 @@ func TestGatherKucoinBalance(t *testing.T) {
 	k := kucoin.New("API_KEY", "API_SECRET")
 	GatherKucoinBalance(k, "BTC", gocron.Every(10).Seconds())
 	gocron.Start()
-	time.Sleep(20 * time.Second)
+	time.Sleep(15 * time.Second)
 }
 
 func TestKucoinListMergedDealtOrders(t *testing.T) {
