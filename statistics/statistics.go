@@ -7,8 +7,8 @@ import (
 	"io"
 	"os"
 	"strings"
+	"time"
 
-	kucoin "github.com/eeonevision/kucoin-go"
 	"github.com/gocolly/colly"
 	"github.com/jasonlvhit/gocron"
 	log "github.com/sirupsen/logrus"
@@ -37,9 +37,8 @@ func init() {
 	logger = log.New()
 
 	// Default configuration
-	timestampFormat := "02-01-2006 15:04:05"
 	logger.Formatter = &log.JSONFormatter{
-		TimestampFormat: timestampFormat,
+		TimestampFormat: time.RFC3339,
 	}
 	if f, err := os.OpenFile(logPath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0666); err == nil {
 		logger.Out = io.MultiWriter(f, os.Stdout)
@@ -132,19 +131,4 @@ func taskGatherTokenMetric(symbol, addr string) {
 		"transfers": transfers,
 		"txns":      txns,
 	}).Info("GatherTokenMetric")
-}
-
-// GatherKucoinBalance records a balance of Kucoin account
-func GatherKucoinBalance(k *kucoin.Kucoin, symbol string, job *gocron.Job) {
-	job.Do(taskGatherKucoinBalance, k, symbol)
-}
-
-func taskGatherKucoinBalance(k *kucoin.Kucoin, symbol string) {
-	if bal, err := k.GetCoinBalance(symbol); err == nil {
-		logger.WithFields(log.Fields{
-			"symbol":  symbol,
-			"balance": bal.Balance,
-			"freeze":  bal.FreezeBalance,
-		}).Info("GatherKucoinBalance")
-	}
 }

@@ -4,7 +4,6 @@ import (
 	"testing"
 	"time"
 
-	kucoin "github.com/eeonevision/kucoin-go"
 	"github.com/jasonlvhit/gocron"
 
 	coinmarketcap "github.com/hexoul/go-coinmarketcap"
@@ -35,18 +34,4 @@ func TestGatherTokenMetric(t *testing.T) {
 	GatherTokenMetric("BNB", "0xB8c77482e45F1F44dE1745F52C74426C631bDD52", gocron.Every(20).Seconds())
 	gocron.Start()
 	time.Sleep(35 * time.Second)
-}
-
-func TestGatherKucoinBalance(t *testing.T) {
-	k := kucoin.New("API_KEY", "API_SECRET")
-	GatherKucoinBalance(k, "BTC", gocron.Every(10).Seconds())
-	gocron.Start()
-	time.Sleep(15 * time.Second)
-}
-
-func TestKucoinListMergedDealtOrders(t *testing.T) {
-	k := kucoin.New("API_KEY", "API_SECRET")
-	if ret, err := k.ListMergedDealtOrders("ETH-BTC", "BUY", 20, 1, 0, 0); err == nil {
-		t.Logf("%v\n", ret)
-	}
 }
