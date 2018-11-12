@@ -49,12 +49,13 @@ func init() {
 	logger.SetLevel(log.InfoLevel)
 }
 
-// GatherCryptoQuote records crypto quote
+// GatherCryptoQuote gathers crypto quote
 func GatherCryptoQuote(options *types.Options, job *gocron.Job) {
-	job.Do(taskGatherCryptoQuote, options)
+	job.Do(TaskGatherCryptoQuote, options)
 }
 
-func taskGatherCryptoQuote(options *types.Options) {
+// TaskGatherCryptoQuote records crypto quote
+func TaskGatherCryptoQuote(options *types.Options) {
 	if data, err := coinmarketcap.GetInstance().CryptoMarketQuotesLatest(options); err == nil {
 		for _, v := range data.CryptoMarket {
 			logger.WithFields(log.Fields{
@@ -65,12 +66,13 @@ func taskGatherCryptoQuote(options *types.Options) {
 	}
 }
 
-// GatherExchangeMarketPairs records exchange quotes
+// GatherExchangeMarketPairs gathers exchange quotes
 func GatherExchangeMarketPairs(options *types.Options, targetSymbol string, job *gocron.Job) {
-	job.Do(taskGatherExchangeMarketPairs, options, targetSymbol)
+	job.Do(TaskGatherExchangeMarketPairs, options, targetSymbol)
 }
 
-func taskGatherExchangeMarketPairs(options *types.Options, targetSymbol string) {
+// TaskGatherExchangeMarketPairs records exchange quotes
+func TaskGatherExchangeMarketPairs(options *types.Options, targetSymbol string) {
 	if data, err := coinmarketcap.GetInstance().ExchangeMarketPairsLatest(options); err == nil {
 		for _, pair := range data.MarketPair {
 			if strings.Contains(pair.MarketPair, targetSymbol) {
@@ -85,16 +87,15 @@ func taskGatherExchangeMarketPairs(options *types.Options, targetSymbol string) 
 	}
 }
 
-// GatherTokenMetric records the number of token holders and transactions
+// GatherTokenMetric gathers the number of token holders and transactions
 func GatherTokenMetric(symbol, addr string, job *gocron.Job) {
-	job.Do(taskGatherTokenMetric, symbol, addr)
+	job.Do(TaskGatherTokenMetric, symbol, addr)
 }
 
+// TaskGatherTokenMetric records the number of token holders and transactions
 // symbol: Token symbol for log
 // addr: Token contract address
-// url: Target url to scraper
-// c: Scraper
-func taskGatherTokenMetric(symbol, addr string) {
+func TaskGatherTokenMetric(symbol, addr string) {
 	var holders, txns, transfers string
 
 	// Target urls
