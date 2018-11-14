@@ -72,7 +72,7 @@ func TestCryptoOhlcvLatest(t *testing.T) {
 	if info.Ohlcv["BTC"].Name != "Bitcoin" {
 		t.FailNow()
 	}
-	if info.Ohlcv["BTC"].Quotes["USD"] == nil {
+	if info.Ohlcv["BTC"].Quote["USD"] == nil {
 		t.FailNow()
 	}
 }
@@ -91,10 +91,10 @@ func TestCryptoOhlcvHistorical(t *testing.T) {
 	if info.Name != "Bitcoin" {
 		t.FailNow()
 	}
-	if info.Ohlcv[0].Quotes["USD"] == nil {
+	if info.Ohlcv[0].Quote["USD"] == nil {
 		t.FailNow()
 	}
-	if info.Ohlcv[0].Quotes["USD"].Volume == 0 {
+	if info.Ohlcv[0].Quote["USD"].Volume == 0 {
 		t.FailNow()
 	}
 }

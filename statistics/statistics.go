@@ -80,11 +80,12 @@ func TaskGatherOhlcv(options *types.Options) {
 
 	if data, err := coinmarketcap.GetInstance().CryptoOhlcvHistorical(options); err == nil {
 		for _, v := range data.Ohlcv {
-			for _, q := range v.Quotes {
+			for k, q := range v.Quote {
 				logger.WithFields(log.Fields{
-					"symbol": data.Symbol,
-					"quote":  q,
-					"ctime":  v.TimeClose,
+					"symbol":  data.Symbol,
+					"convert": k,
+					"quote":   q,
+					"ctime":   v.TimeClose,
 				}).Info("GatherOhlcv")
 			}
 		}

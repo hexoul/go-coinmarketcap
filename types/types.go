@@ -144,7 +144,7 @@ type Ohlcv struct {
 	LastUpdated string                 `json:"last_updated"`
 	TimeOpen    string                 `json:"time_open"`
 	TimeClose   string                 `json:"time_close"`
-	Quotes      map[string]*OhlcvQuote `json:"quote"`
+	Quote       map[string]*OhlcvQuote `json:"quote"`
 }
 
 // OhlcvQuote structure
