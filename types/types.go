@@ -123,6 +123,32 @@ type MarketPair struct {
 	Quote           map[string]*Quote `json:"quote"`
 }
 
+// OhlcvMap structure
+type OhlcvMap struct {
+	Ohlcv map[string]*Ohlcv `json:"data"`
+}
+
+// Ohlcv structure
+type Ohlcv struct {
+	ID          int                    `json:"id"`
+	Name        string                 `json:"name"`
+	Symbol      string                 `json:"symbol"`
+	LastUpdated string                 `json:"last_updated"`
+	TimeOpen    string                 `json:"time_open"`
+	TimeClose   string                 `json:"time_close"`
+	Quotes      map[string]*OhlcvQuote `json:"quote"`
+}
+
+// OhlcvQuote structure
+type OhlcvQuote struct {
+	Open        float64 `json:"open"`
+	High        float64 `json:"high"`
+	Low         float64 `json:"low"`
+	Close       float64 `json:"close"`
+	Volume      float64 `json:"volume"`
+	LastUpdated string  `json:"last_updated"`
+}
+
 // ExchangeMarketQuotes structure
 type ExchangeMarketQuotes struct {
 	MarketQuote map[string]*MarketQuote `json:"data"`

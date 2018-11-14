@@ -89,6 +89,25 @@ func (s *Client) CryptoMarketPairsLatest(options *types.Options) (*types.MarketP
 	return result, nil
 }
 
+// CryptoOhlcvLatest returns the latest OHLCV (Open, High, Low, Close, Volume) market values for one or more cryptocurrencies in the currently UTC day.
+//   arg: id, symbol, convert
+//   src: https://pro-api.coinmarketcap.com/v1/cryptocurrency/ohlcv/latest
+//   doc: https://pro.coinmarketcap.com/api/v1#operation/getV1CryptocurrencyOhlcvLatest
+func (s *Client) CryptoOhlcvLatest(options *types.Options) (*types.OhlcvMap, error) {
+	url := fmt.Sprintf("%s/cryptocurrency/ohlcv/latest?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
+
+	_, body, err := s.getResponse(url)
+	if err != nil {
+		return nil, err
+	}
+
+	result := new(types.OhlcvMap)
+	if err := json.Unmarshal(body, result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // CryptoMarketQuotesLatest gets the latest market quote for 1 or more cryptocurrencies.
 //   arg: id, symbol, convert
 //   src: https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest
