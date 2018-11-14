@@ -154,7 +154,8 @@ type OhlcvQuote struct {
 	Low         float64 `json:"low"`
 	Close       float64 `json:"close"`
 	Volume      float64 `json:"volume"`
-	LastUpdated string  `json:"last_updated"`
+	Timestamp   string  `json:"timestamp,omitempty"`
+	LastUpdated string  `json:"last_updated,omitempty"`
 }
 
 // ExchangeMarketQuotes structure

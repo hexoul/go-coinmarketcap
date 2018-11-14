@@ -22,6 +22,15 @@ func TestGatherCryptoQuote(t *testing.T) {
 	time.Sleep(15 * time.Second)
 }
 
+func TestGatherOhlcv(t *testing.T) {
+	GatherOhlcv(&types.Options{
+		Symbol:  "BTC",
+		Convert: "USD",
+	}, gocron.Every(10).Seconds())
+	gocron.Start()
+	time.Sleep(15 * time.Second)
+}
+
 func TestGatherExchangeMarketPairs(t *testing.T) {
 	GatherExchangeMarketPairs(&types.Options{
 		Slug: "binance",

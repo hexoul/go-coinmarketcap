@@ -81,8 +81,8 @@ func TestCryptoOhlcvHistorical(t *testing.T) {
 	info, err := GetInstance().CryptoOhlcvHistorical(&types.Options{
 		Symbol:    "BTC",
 		Convert:   "USD",
-		TimeStart: "2018-11-10",
-		TimeEnd:   "2018-11-14",
+		TimeStart: "2018-11-12",
+		TimeEnd:   "2018-11-13",
 		Interval:  types.IntervalOptions.Hourly,
 	})
 	if err != nil {

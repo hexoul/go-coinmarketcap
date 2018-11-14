@@ -66,6 +66,31 @@ func TaskGatherCryptoQuote(options *types.Options) {
 	}
 }
 
+// GatherOhlcv gathers crypto quote
+func GatherOhlcv(options *types.Options, job *gocron.Job) {
+	job.Do(TaskGatherOhlcv, options)
+}
+
+// TaskGatherOhlcv records crypto quote
+func TaskGatherOhlcv(options *types.Options) {
+	start := time.Now().AddDate(0, 0, -2)
+	end := time.Now().AddDate(0, 0, -1)
+	options.TimeStart = util.ISODate(start)
+	options.TimeEnd = util.ISODate(end)
+
+	if data, err := coinmarketcap.GetInstance().CryptoOhlcvHistorical(options); err == nil {
+		for _, v := range data.Ohlcv {
+			for _, q := range v.Quotes {
+				logger.WithFields(log.Fields{
+					"symbol": data.Symbol,
+					"quote":  q,
+					"ctime":  v.TimeClose,
+				}).Info("GatherOhlcv")
+			}
+		}
+	}
+}
+
 // GatherExchangeMarketPairs gathers exchange quotes
 func GatherExchangeMarketPairs(options *types.Options, targetSymbol string, job *gocron.Job) {
 	job.Do(TaskGatherExchangeMarketPairs, options, targetSymbol)

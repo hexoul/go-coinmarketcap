@@ -126,3 +126,8 @@ func InvokeChromedp(url, qeury string, sec int, buffer *string) (err error) {
 	err = dp.Wait()
 	return
 }
+
+// ISODate returns ISO date format like "2018-11-23"
+func ISODate(t time.Time) string {
+	return strings.Split(t.Format(time.RFC3339), "T")[0]
+}
