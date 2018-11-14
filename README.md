@@ -18,7 +18,7 @@
 | Cryptocurrency | /v1/cryptocurrency/listings/historical | - |
 | Cryptocurrency | /v1/cryptocurrency/market-pairs/latest | ✔ |
 | Cryptocurrency | /v1/cryptocurrency/ohlcv/latest        | ✔ |
-| Cryptocurrency | /v1/cryptocurrency/ohlcv/historical    | - |
+| Cryptocurrency | /v1/cryptocurrency/ohlcv/historical    | ✔ |
 | Cryptocurrency | /v1/cryptocurrency/quotes/latest       | ✔ |
 | Cryptocurrency | /v1/cryptocurrency/quotes/historical   | - |
 | Exchange       | /v1/exchange/info                      | ✔ |

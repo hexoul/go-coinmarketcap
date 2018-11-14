@@ -123,6 +123,14 @@ type MarketPair struct {
 	Quote           map[string]*Quote `json:"quote"`
 }
 
+// OhlcvList structure
+type OhlcvList struct {
+	ID     int      `json:"id"`
+	Name   string   `json:"name"`
+	Symbol string   `json:"symbol"`
+	Ohlcv  []*Ohlcv `json:"quotes"`
+}
+
 // OhlcvMap structure
 type OhlcvMap struct {
 	Ohlcv map[string]*Ohlcv `json:"data"`

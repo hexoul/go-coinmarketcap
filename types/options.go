@@ -12,10 +12,33 @@ type Options struct {
 	SortDir    string // "asc", "desc"
 	CryptoType string // "all", "coins", "tokens"
 	MarketType string // "all", "fees", "no_fees"
+	TimePeriod string // "daily"
+	TimeStart  string
+	TimeEnd    string
+	Interval   string // "hourly" "daily" "weekly" "monthly" "yearly" "1d" "2d" "3d" "7d" "14d" "15d" "30d" "60d" "90d" "365d"
+	Count      int
 }
 
-// SortOptions sort options
-var SortOptions sortOptions
+type intervalOptions struct {
+	Hourly  string
+	Daily   string
+	Weekly  string
+	Montly  string
+	Yearly  string
+	Day1    string
+	Days2   string
+	Days3   string
+	Days7   string
+	Days14  string
+	Days15  string
+	Days30  string
+	Days60  string
+	Days90  string
+	Days365 string
+}
+
+// IntervalOptions for interval
+var IntervalOptions intervalOptions
 
 type sortOptions struct {
 	Name              string
@@ -33,7 +56,28 @@ type sortOptions struct {
 	PercentChange7D   string
 }
 
+// SortOptions for sorting
+var SortOptions sortOptions
+
 func init() {
+	IntervalOptions = intervalOptions{
+		Hourly:  "hourly",
+		Daily:   "daily",
+		Weekly:  "weekly",
+		Montly:  "montly",
+		Yearly:  "yearly",
+		Day1:    "1d",
+		Days2:   "2d",
+		Days3:   "3d",
+		Days7:   "7d",
+		Days14:  "14d",
+		Days15:  "15d",
+		Days30:  "30d",
+		Days60:  "60d",
+		Days90:  "90d",
+		Days365: "365d",
+	}
+
 	SortOptions = sortOptions{
 		Name:              "name",
 		Symbol:            "symbol",

@@ -20,6 +20,7 @@ type Interface interface {
 	CryptoListingsLatest(options *types.Options) (*types.CryptoMarketList, error)
 	CryptoMarketPairsLatest(options *types.Options) (*types.MarketPairs, error)
 	CryptoOhlcvLatest(options *types.Options) (*types.OhlcvMap, error)
+	CryptoOhlcvHistorical(options *types.Options) (*types.OhlcvList, error)
 	CryptoMarketQuotesLatest(options *types.Options) (*types.CryptoMarketMap, error)
 
 	ExchangeInfo(options *types.Options) (*types.ExchangeInfoMap, error)

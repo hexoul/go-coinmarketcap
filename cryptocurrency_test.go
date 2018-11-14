@@ -77,6 +77,28 @@ func TestCryptoOhlcvLatest(t *testing.T) {
 	}
 }
 
+func TestCryptoOhlcvHistorical(t *testing.T) {
+	info, err := GetInstance().CryptoOhlcvHistorical(&types.Options{
+		Symbol:    "BTC",
+		Convert:   "USD",
+		TimeStart: "2018-11-10",
+		TimeEnd:   "2018-11-14",
+		Interval:  types.IntervalOptions.Hourly,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if info.Name != "Bitcoin" {
+		t.FailNow()
+	}
+	if info.Ohlcv[0].Quotes["USD"] == nil {
+		t.FailNow()
+	}
+	if info.Ohlcv[0].Quotes["USD"].Volume == 0 {
+		t.FailNow()
+	}
+}
+
 func TestCryptoMarketQuotesLatest(t *testing.T) {
 	quotes, err := GetInstance().CryptoMarketQuotesLatest(&types.Options{
 		Symbol: "BTC,ETH",

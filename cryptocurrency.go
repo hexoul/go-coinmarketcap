@@ -108,6 +108,29 @@ func (s *Client) CryptoOhlcvLatest(options *types.Options) (*types.OhlcvMap, err
 	return result, nil
 }
 
+// CryptoOhlcvHistorical returns an interval of historic OHLCV (Open, High, Low, Close, Volume) market quotes for a cryptocurrency.
+//   arg: id, symbol, convert, time_period, time_start, time_end, count, interval
+//   src: https://pro-api.coinmarketcap.com/v1/cryptocurrency/ohlcv/historical
+//   doc: https://pro.coinmarketcap.com/api/v1#operation/getV1CryptocurrencyOhlcvHistorical
+func (s *Client) CryptoOhlcvHistorical(options *types.Options) (*types.OhlcvList, error) {
+	url := fmt.Sprintf("%s/cryptocurrency/ohlcv/historical?%s", baseURL, strings.Join(util.ParseOptions(options), "&"))
+
+	resp, _, err := s.getResponse(url)
+	if err != nil {
+		return nil, err
+	}
+
+	result := new(types.OhlcvList)
+	b, err := json.Marshal(resp.Data)
+	if err != nil {
+		return nil, err
+	}
+	if err := json.Unmarshal(b, result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // CryptoMarketQuotesLatest gets the latest market quote for 1 or more cryptocurrencies.
 //   arg: id, symbol, convert
 //   src: https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest

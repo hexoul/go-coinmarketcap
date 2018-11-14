@@ -61,6 +61,21 @@ func ParseOptions(options *types.Options) (params []string) {
 	if options.MarketType != "" {
 		params = append(params, fmt.Sprintf("market_type=%s", options.MarketType))
 	}
+	if options.TimePeriod != "" {
+		params = append(params, fmt.Sprintf("time_period=%s", options.TimePeriod))
+	}
+	if options.TimeStart != "" {
+		params = append(params, fmt.Sprintf("time_start=%s", options.TimeStart))
+	}
+	if options.TimeEnd != "" {
+		params = append(params, fmt.Sprintf("time_end=%s", options.TimeEnd))
+	}
+	if options.Interval != "" {
+		params = append(params, fmt.Sprintf("interval=%s", options.Interval))
+	}
+	if options.Count != 0 {
+		params = append(params, fmt.Sprintf("interval=%d", options.Count))
+	}
 	return
 }
 
