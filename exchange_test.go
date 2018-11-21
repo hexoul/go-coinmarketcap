@@ -36,7 +36,7 @@ func TestExchangeListingsLatest(t *testing.T) {
 		t.Fatal(err)
 	} else if len(info.MarketQuote) < 2 {
 		t.FailNow()
-	} else if info.MarketQuote[0].Name != "Binance" {
+	} else if info.MarketQuote[0].Name == "" {
 		t.FailNow()
 	}
 }

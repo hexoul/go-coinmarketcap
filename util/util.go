@@ -3,6 +3,7 @@ package util
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -31,50 +32,16 @@ func ParseOptions(options *types.Options) (params []string) {
 	if options == nil {
 		return
 	}
-	if options.ID != "" {
-		params = append(params, fmt.Sprintf("id=%s", options.ID))
+	bOption, err := json.Marshal(options)
+	if err != nil {
+		return
 	}
-	if options.Symbol != "" {
-		params = append(params, fmt.Sprintf("symbol=%s", options.Symbol))
+	mOption := new(map[string]interface{})
+	if err := json.Unmarshal(bOption, &mOption); err != nil {
+		return
 	}
-	if options.Slug != "" {
-		params = append(params, fmt.Sprintf("slug=%s", options.Slug))
-	}
-	if options.Start != 0 {
-		params = append(params, fmt.Sprintf("start=%d", options.Start))
-	}
-	if options.Limit != 0 {
-		params = append(params, fmt.Sprintf("limit=%d", options.Limit))
-	}
-	if options.Convert != "" {
-		params = append(params, fmt.Sprintf("convert=%s", options.Convert))
-	}
-	if options.Sort != "" {
-		params = append(params, fmt.Sprintf("sort=%s", options.Sort))
-	}
-	if options.SortDir != "" {
-		params = append(params, fmt.Sprintf("sort_dir=%s", options.SortDir))
-	}
-	if options.CryptoType != "" {
-		params = append(params, fmt.Sprintf("cryptocurrency_type=%s", options.CryptoType))
-	}
-	if options.MarketType != "" {
-		params = append(params, fmt.Sprintf("market_type=%s", options.MarketType))
-	}
-	if options.TimePeriod != "" {
-		params = append(params, fmt.Sprintf("time_period=%s", options.TimePeriod))
-	}
-	if options.TimeStart != "" {
-		params = append(params, fmt.Sprintf("time_start=%s", options.TimeStart))
-	}
-	if options.TimeEnd != "" {
-		params = append(params, fmt.Sprintf("time_end=%s", options.TimeEnd))
-	}
-	if options.Interval != "" {
-		params = append(params, fmt.Sprintf("interval=%s", options.Interval))
-	}
-	if options.Count != 0 {
-		params = append(params, fmt.Sprintf("interval=%d", options.Count))
+	for k, v := range *mOption {
+		params = append(params, fmt.Sprintf("%s=%v", k, v))
 	}
 	return
 }

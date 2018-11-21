@@ -2,6 +2,8 @@ package util
 
 import (
 	"context"
+	"encoding/json"
+	"fmt"
 	"testing"
 	"time"
 
@@ -24,6 +26,26 @@ func TestParseOptions(t *testing.T) {
 		Sort:  types.SortOptions.Name,
 	})) != 2 {
 		t.FailNow()
+	}
+}
+
+func TestParse(t *testing.T) {
+	s := &types.Options{
+		Symbol:     "BTC",
+		Slug:       "binance",
+		Limit:      100,
+		CryptoType: "tokens",
+	}
+	b, err := json.Marshal(s)
+	if err != nil {
+		t.FailNow()
+	}
+	p := new(map[string]interface{})
+	if err := json.Unmarshal(b, &p); err != nil {
+		t.FailNow()
+	}
+	for k, v := range *p {
+		t.Logf(fmt.Sprintf("%s=%v", k, v))
 	}
 }
 

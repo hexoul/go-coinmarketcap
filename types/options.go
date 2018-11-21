@@ -2,21 +2,21 @@ package types
 
 // Options for request
 type Options struct {
-	ID         string
-	Symbol     string
-	Slug       string
-	Start      int // >= 1
-	Limit      int
-	Convert    string // "USD", ...
-	Sort       string // <- SortOptions
-	SortDir    string // "asc", "desc"
-	CryptoType string // "all", "coins", "tokens"
-	MarketType string // "all", "fees", "no_fees"
-	TimePeriod string // "daily"
-	TimeStart  string
-	TimeEnd    string
-	Interval   string // "hourly" "daily" "weekly" "monthly" "yearly" "1d" "2d" "3d" "7d" "14d" "15d" "30d" "60d" "90d" "365d"
-	Count      int
+	ID         string `json:"id,omitempty"`
+	Symbol     string `json:"symbol,omitempty"`
+	Slug       string `json:"slug,omitempty"`
+	Start      int    `json:"start,omitempty"` // >= 1
+	Limit      int    `json:"limit,omitempty"`
+	Convert    string `json:"convert,omitempty"`             // "USD", ...
+	Sort       string `json:"sort,omitempty"`                // <- SortOptions
+	SortDir    string `json:"sort_dir,omitempty"`            // "asc", "desc"
+	CryptoType string `json:"cryptocurrency_type,omitempty"` // "all", "coins", "tokens"
+	MarketType string `json:"market_type,omitempty"`         // "all", "fees", "no_fees"
+	TimePeriod string `json:"time_period,omitempty"`         // "daily"
+	TimeStart  string `json:"time_start,omitempty"`
+	TimeEnd    string `json:"time_end,omitempty"`
+	Interval   string `json:"interval,omitempty"` // "hourly" "daily" "weekly" "monthly" "yearly" "1d" "2d" "3d" "7d" "14d" "15d" "30d" "60d" "90d" "365d"
+	Count      int    `json:"count,omitempty"`
 }
 
 type intervalOptions struct {
