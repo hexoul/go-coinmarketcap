@@ -152,6 +152,10 @@ func TaskGatherTokenMetric(symbol, addr string) {
 	c1.Visit(url1)
 	c2.Visit(url2)
 
+	if holders == "" && transfers == "" && txns == "" {
+		return
+	}
+
 	logger.WithFields(log.Fields{
 		"symbol":    symbol,
 		"holders":   holders,
