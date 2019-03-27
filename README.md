@@ -6,11 +6,47 @@
 
 > Coinmarketcap (CMC) Pro API Client written in Golang
 
-## Usage
+## Install
+
+`go get -u github.com/hexoul/go-coinmarketcap`
+
+## Getting started
+
 - As library, start from `coinmarketcap.GetInstanceWithKey('YOUR_API_KEY')`
 - As program, start from `coinmarketcap.GetInstance()` after executing `go run -cmcApikey=[YOUR_API_KEY]`
 
+```go
+package main
+
+import (
+    "fmt"
+
+    cmc "github.com/hexoul/go-coinmarketcap"
+    "github.com/hexoul/go-coinmarketcap/types"
+)
+
+func init() {
+    cmc.GetInstanceWithKey("YOUR_API_KEY")
+}
+
+func main() {
+    if crypto, err := cmc.GetInstance().CryptoInfo(&types.Options{
+        Symbol: "BTC",
+    }); err == nil {
+        fmt.Println(crypto.CryptoInfo["BTC"].Name)
+    }
+
+    client := cmc.GetInstance()
+    if exchange, err := client.ExchangeInfo(&types.Options{
+        Slug: "binance",
+    }); err == nil {
+        fmt.Println(exchange.ExchangeInfo["binance"].Name)
+    }
+}
+```
+
 ## Features
+
 | Type           | Endpoint                               | Done |
 |----------------|----------------------------------------|-------------|
 | Cryptocurrency | /v1/cryptocurrency/info                | ✔ |
@@ -34,4 +70,5 @@
 | Tools          | /v1/tools/price-conversion             | - |
 
 ## Reference
+
 [Coinmarketcap (CMC) Pro](https://pro.coinmarketcap.com/api/v1)

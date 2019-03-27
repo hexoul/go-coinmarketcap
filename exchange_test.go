@@ -43,12 +43,17 @@ func TestExchangeListingsLatest(t *testing.T) {
 
 func TestExchangeMarketPairsLatest(t *testing.T) {
 	if info, err := GetInstance().ExchangeMarketPairsLatest(&types.Options{
-		Slug:  "binance",
-		Limit: 200,
+		Slug:    "binance",
+		Limit:   200,
+		Convert: "USD",
 	}); err != nil {
 		t.Fatal(err)
-	} else if info.Name != "Binance" {
+	} else if info.Name == "Binance" {
 		t.FailNow()
+	} else {
+		for i, pair := range info.MarketPair {
+			t.Log(pair.MarketPair, i)
+		}
 	}
 }
 
