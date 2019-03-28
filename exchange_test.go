@@ -48,11 +48,11 @@ func TestExchangeMarketPairsLatest(t *testing.T) {
 		Convert: "USD",
 	}); err != nil {
 		t.Fatal(err)
-	} else if info.Name == "Binance" {
+	} else if info.Name != "Binance" {
 		t.FailNow()
 	} else {
-		for i, pair := range info.MarketPair {
-			t.Log(pair.MarketPair, i)
+		for _, pair := range info.MarketPair {
+			t.Log(pair.MarketPair, pair.Quote["USD"].Price)
 		}
 	}
 }
